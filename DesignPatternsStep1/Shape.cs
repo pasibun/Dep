@@ -1,0 +1,96 @@
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace DesignPatternsStep1
+{
+    public abstract class Shape
+    {
+        protected Control m_frmRef;
+        protected Point location;
+        protected Size size;
+
+        protected Rectangle shape;
+        protected Graphics formGraphics;
+        protected Pen formPen;
+
+        protected bool resized = false;
+        protected bool moved = false;
+        protected int shapeId = -1;
+        protected bool drawn = false;
+        protected bool inGroup = false;
+
+        public int ShapeId
+        {
+            get {return shapeId; }
+            set { shapeId = value; }
+        }
+
+        public bool InGroup
+        {
+            get { return inGroup; }
+            set { inGroup = value; }
+        }
+
+        public bool alreadyDrawn
+        {
+            get { return drawn; }
+            set { drawn = value; }
+        }
+
+        public bool Moved
+        {
+            get { return moved; }
+            set { moved = value; }
+        }
+
+        public bool Resized
+        {
+            get { return resized; }
+            set { resized = value; }
+        }
+
+        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup) 
+        {
+            m_frmRef = FormToDrawOn;
+            location = shapeLocation;
+            size = shapeSize;
+            ShapeId = shapeId;
+            InGroup = inGroup;
+        }
+
+        public virtual void DrawShape(int x, int y, int Width, int Height, Pen pen)
+        {
+            shape = new Rectangle(x, y, Width, Height);
+            formPen = new Pen(pen.Color);
+        }
+
+        public bool Contains(int x, int y)
+        {
+            return shape.Contains(x,y);
+        }
+        
+        public int X
+        {
+            get { return location.X; }
+            set { location.X = value; }
+        }
+
+        public int Y
+        {
+            get { return location.Y; }
+            set { location.Y = value; }
+        }
+
+        public int Width
+        {
+            get { return size.Width; }
+            set { size.Width = value; }
+        }
+
+        public int Height
+        {
+            get { return size.Height; }
+            set { size.Height = value; }
+        }
+    }
+}
