@@ -34,3 +34,12 @@ C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\Desig
 C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
 C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
 C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
+C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache

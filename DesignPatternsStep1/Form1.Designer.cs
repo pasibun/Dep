@@ -43,6 +43,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.exportBtn = new System.Windows.Forms.Button();
             this.moveCheckBox = new System.Windows.Forms.CheckBox();
+            this.compositeBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // drawEllipseBtn
@@ -186,11 +187,21 @@
             this.moveCheckBox.Text = "Move";
             this.moveCheckBox.UseVisualStyleBackColor = true;
             // 
+            // compositeBox
+            // 
+            this.compositeBox.FormattingEnabled = true;
+            this.compositeBox.ItemHeight = 16;
+            this.compositeBox.Location = new System.Drawing.Point(1145, 12);
+            this.compositeBox.Name = "compositeBox";
+            this.compositeBox.Size = new System.Drawing.Size(523, 84);
+            this.compositeBox.TabIndex = 15;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 377);
+            this.ClientSize = new System.Drawing.Size(1680, 552);
+            this.Controls.Add(this.compositeBox);
             this.Controls.Add(this.moveCheckBox);
             this.Controls.Add(this.exportBtn);
             this.Controls.Add(this.button1);
@@ -230,6 +241,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button exportBtn;
         private System.Windows.Forms.CheckBox moveCheckBox;
+        private System.Windows.Forms.ListBox compositeBox;
     }
 }
 

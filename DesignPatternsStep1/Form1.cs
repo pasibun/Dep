@@ -143,9 +143,10 @@ namespace DesignPatternsStep1
 
                     if (comp != null && !resize.Checked && !moveCheckBox.Checked)
                     {
-                        leaf = new Leaf(drawnShapes[i]);
-                        comp.AddSubordinate(leaf);
-                        drawnShapes[i].InGroup = true;
+                        
+                            leaf = new Leaf(drawnShapes[i]);
+                            comp.AddSubordinate(leaf);
+                            drawnShapes[i].InGroup = true;                        
                     }
                 }
             }
@@ -401,7 +402,17 @@ namespace DesignPatternsStep1
 
         private void button1_Click(object sender, EventArgs e)
         {
-                composites.Add(comp);
+            composites.Add(comp);
+
+            if (compositeBox.SelectedIndex > -1)
+            {
+                composites[compositeBox.SelectedIndex].AddSubordinate(comp);
+            }
+
+            compositeBox.DataSource = null;
+            compositeBox.DataSource = composites;
+
+            compositeBox.ClearSelected();
         }
 
         private void exportBtn_Click(object sender, EventArgs e)
