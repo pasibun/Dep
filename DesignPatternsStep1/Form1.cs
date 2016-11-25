@@ -407,6 +407,7 @@ namespace DesignPatternsStep1
             if (compositeBox.SelectedIndex > -1)
             {
                 composites[compositeBox.SelectedIndex].AddSubordinate(comp);
+                comp.groepInGroup = true;
             }
 
             compositeBox.DataSource = null;

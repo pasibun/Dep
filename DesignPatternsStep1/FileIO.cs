@@ -156,32 +156,50 @@ namespace DesignPatternsStep1
 
         public List<string> exportFile(List<Composite> composites)
         {
-            string rectangle = "rectangle ";
-            string ellipse = "ellipse ";
-            string group = "group ";
+            int spaces = 12;
+            
             noGroupShapes = Form1.drawnShapes;
             List<string> exportList = new List<string>();
             foreach (Composite c in composites)
             {
-                exportList.Add(group + c.subordinates.Count.ToString());
-                for (int i = 0; i < c.subordinates.Count; i++)
+                if (!c.groepInGroup)
+                    export(c, exportList, spaces);
+                else {
+                }    
+            }            
+            return exportList; ;
+        }
+                
+        private void export(Composite c, List<string> exportList, int spaces)
+        {
+            string rectangle = "rectangle ";
+            string ellipse = "ellipse ";
+            string group = "group ";
+
+            exportList.Add(group + c.subordinates.Count.ToString());
+
+            for (int i = 0; i < c.subordinates.Count; i++)
+            {
+                if (c.subordinates[i].GetShape() is RectangleShape)
                 {
-                    if (c.subordinates[i].GetShape() is RectangleShape)
-                    {
-                        exportList.Add(rectangle.PadLeft(12) + c.subordinates[i].GetShape().X +
-                            " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
-                            " " + c.subordinates[i].GetShape().Height);
-                        removeShapeFromGroup(c.subordinates[i].GetShape());
-                    }
-                    else
-                    {
-                        exportList.Add(ellipse.PadLeft(12) + c.subordinates[i].GetShape().X +
-                            " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
-                            " " + c.subordinates[i].GetShape().Height);
-                        removeShapeFromGroup(c.subordinates[i].GetShape());
-                    }
+                    exportList.Add(rectangle.PadLeft(spaces) + c.subordinates[i].GetShape().X +
+                        " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
+                        " " + c.subordinates[i].GetShape().Height);
+                    removeShapeFromGroup(c.subordinates[i].GetShape());
+                }
+                if (c.subordinates[i].GetShape() is EllipseShape)
+                {
+                    exportList.Add(ellipse.PadLeft(spaces) + c.subordinates[i].GetShape().X +
+                        " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
+                        " " + c.subordinates[i].GetShape().Height);
+                    removeShapeFromGroup(c.subordinates[i].GetShape());
+                }
+                else
+                {
+                    exportList.Add(group.PadLeft(spaces) + c.subordinates.Count.ToString());
                 }
             }
+
             for (int i = 0; i < noGroupShapes.Count; i++)
             {
                 if (noGroupShapes[i] is RectangleShape)
@@ -194,7 +212,6 @@ namespace DesignPatternsStep1
                     exportList.Add(ellipse + Form1.drawnShapes[i].X.ToString() + " " + Form1.drawnShapes[i].Y.ToString() + " " + Form1.drawnShapes[i].Width.ToString() + " " + Form1.drawnShapes[i].Height.ToString());
                 }
             }
-            return exportList; ;
         }
 
         public void removeShapeFromGroup(Shape shape)
@@ -209,7 +226,6 @@ namespace DesignPatternsStep1
         }
 
     }
-
 }
 
 

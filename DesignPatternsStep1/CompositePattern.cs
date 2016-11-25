@@ -87,6 +87,7 @@ namespace DesignPatternsStep1
         public String name;
         private Point position;
         private Size size;
+        public bool groepInGroup = false;
 
         public List<CompositePattern> subordinates = new List<CompositePattern>();
 
@@ -95,6 +96,12 @@ namespace DesignPatternsStep1
             this.name = name;
             this.position = position;
             this.size = size;
+        }
+
+        public bool GroupInGroup
+        {
+            get { return groepInGroup; }
+            set { groepInGroup = value; }
         }
 
         public override void resizeGroup(int newWidth, int newHeight)
