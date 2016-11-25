@@ -85,6 +85,7 @@ namespace DesignPatternsStep1
     class Composite : CompositePattern
     {
         public String name;
+        public int compositeSize = 0;
         private Point position;
         private Size size;
 
@@ -116,6 +117,7 @@ namespace DesignPatternsStep1
         public void AddSubordinate(CompositePattern leaf)
         {
             subordinates.Add(leaf);
+            compositeSize++;
         }
 
         public override Shape GetShape()
