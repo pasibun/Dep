@@ -410,8 +410,12 @@ namespace DesignPatternsStep1
                 comp.groepInGroup = true;
             }
 
-            compositeBox.DataSource = null;
-            compositeBox.DataSource = composites;
+            compositeBox.Items.Clear();
+            for (int i = 0; i < composites.Count; i++)
+            {
+                compositeBox.Items.Add(composites[i].name + " " + composites[i].compositeSize);
+            }
+            //compositeBox.DataSource = composites;
 
             compositeBox.ClearSelected();
         }
