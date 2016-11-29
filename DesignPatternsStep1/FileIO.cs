@@ -10,8 +10,11 @@ namespace DesignPatternsStep1
 {
     class FileIO
     {
+        int spaces;
+        string group = "group";
         private int addSpaces;
-
+        List<string> exportList = new List<string>();
+        List<Composite> compList = new List<Composite>();
         private string[] lines;
         private int shapeAmountInGroup;
         private int shapeAmountInGroupCheck;
@@ -99,17 +102,12 @@ namespace DesignPatternsStep1
                 {
                     case "rectangle":
                         {
-                            //countspace voor het woord moet getelt worden
-                            //if (countSpaces2.Equals(countSpaces))
-                            // {
-                            //Shape s = new RectangleShape(form, new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2])), new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4])), form.commandIndex);
-                            Shape s = createEllipse(new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2])), new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4])));
+                            Shape s = createEllipse(new Point(int.Parse(wordParts2[1]), int.Parse(wordParts2[2])), new Size(int.Parse(wordParts2[3]), int.Parse(wordParts2[4])));
                             leaf = new Leaf(s);
                             comp.AddSubordinate(leaf);
                             createRectangle(new Point(s.X, s.Y), new Size(s.Width, s.Height));
                             shapeAmountInGroupCheck++;
                             lines[i].Remove(i);
-                            //}
                             break;
                         }
                     case "ellipse":
@@ -118,7 +116,7 @@ namespace DesignPatternsStep1
                             if (countSpaces2.Equals(countSpaces))
                             {
                                 //Shape s = new EllipseShape(form, new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2])), new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4])), form.commandIndex);
-                                leaf = new Leaf(createEllipse(new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2])), new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4]))));
+                                leaf = new Leaf(createEllipse(new Point(int.Parse(wordParts2[1]), int.Parse(wordParts2[2])), new Size(int.Parse(wordParts2[3]), int.Parse(wordParts2[4]))));
                                 comp.AddSubordinate(leaf);
 
                                 groupShapes.Add(lines[i]);
@@ -155,63 +153,65 @@ namespace DesignPatternsStep1
         }
 
         public List<string> exportFile(List<Composite> composites)
-        {
-            int spaces = 12;
-            
+        {           
             noGroupShapes = Form1.drawnShapes;
-            List<string> exportList = new List<string>();
+            spaces = 12;          
             foreach (Composite c in composites)
             {
                 if (!c.groepInGroup)
-                    export(c, exportList, spaces);
-                else {
+                {
+                    exportList.Add(group + " " + c.subordinates.Count.ToString());
+                    export(c, spaces, 0, 0);
+                }
+                else
+                {
                 }    
             }            
             return exportList; ;
         }
-                
-        private void export(Composite c, List<string> exportList, int spaces)
+
+        private bool export(Composite c, int spaces, int totalInGroup, int groupIngroup)
         {
             string rectangle = "rectangle ";
             string ellipse = "ellipse ";
-            string group = "group ";
-
-            exportList.Add(group + c.subordinates.Count.ToString());
-
-            for (int i = 0; i < c.subordinates.Count; i++)
+            if (c.subordinates.Count.Equals(totalInGroup))
             {
-                if (c.subordinates[i].GetShape() is RectangleShape)
+                if (groupIngroup.Equals(0))
                 {
-                    exportList.Add(rectangle.PadLeft(spaces) + c.subordinates[i].GetShape().X +
-                        " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
-                        " " + c.subordinates[i].GetShape().Height);
-                    removeShapeFromGroup(c.subordinates[i].GetShape());
-                }
-                if (c.subordinates[i].GetShape() is EllipseShape)
-                {
-                    exportList.Add(ellipse.PadLeft(spaces) + c.subordinates[i].GetShape().X +
-                        " " + c.subordinates[i].GetShape().Y + " " + c.subordinates[i].GetShape().Width +
-                        " " + c.subordinates[i].GetShape().Height);
-                    removeShapeFromGroup(c.subordinates[i].GetShape());
+                    return true;
                 }
                 else
                 {
-                    exportList.Add(group.PadLeft(spaces) + c.subordinates.Count.ToString());
+                    exportList.Add(group.PadLeft(7) + " " + compList[groupIngroup -1].subordinates.Count.ToString());                    
+                    return export(compList[groupIngroup - 1], spaces + 2, 0, groupIngroup - 1);
                 }
             }
-
-            for (int i = 0; i < noGroupShapes.Count; i++)
+            else
             {
-                if (noGroupShapes[i] is RectangleShape)
+                if (c.subordinates[totalInGroup].GetShape() is RectangleShape)
                 {
-                    exportList.Add(rectangle + noGroupShapes[i].X + " " + noGroupShapes[i].Y
-                        + " " + noGroupShapes[i].Width + " " + noGroupShapes[i].Height);
+                    formatter(c, rectangle, totalInGroup, spaces);
+                    return export(c, spaces, totalInGroup + 1, groupIngroup);
+                }
+                if (c.subordinates[totalInGroup].GetShape() is EllipseShape)
+                {
+                    formatter(c, ellipse, totalInGroup, spaces);
+                    return export(c, spaces, totalInGroup + 1, groupIngroup);
                 }
                 else
                 {
-                    exportList.Add(ellipse + Form1.drawnShapes[i].X.ToString() + " " + Form1.drawnShapes[i].Y.ToString() + " " + Form1.drawnShapes[i].Width.ToString() + " " + Form1.drawnShapes[i].Height.ToString());
+                    compList.Add(c.subordinates[totalInGroup] as Composite);
+                    return export(c, spaces, totalInGroup + 1, groupIngroup + 1);
                 }
             }
+        }
+
+        private void formatter(Composite c, string shape, int totalInGroup, int spaces)
+        {
+            exportList.Add(shape.PadLeft(spaces) + c.subordinates[totalInGroup].GetShape().X +
+                            " " + c.subordinates[totalInGroup].GetShape().Y + " " + c.subordinates[totalInGroup].GetShape().Width +
+                            " " + c.subordinates[totalInGroup].GetShape().Height);
+            removeShapeFromGroup(c.subordinates[totalInGroup].GetShape());
         }
 
         public void removeShapeFromGroup(Shape shape)
@@ -227,32 +227,3 @@ namespace DesignPatternsStep1
 
     }
 }
-
-
-//if (shapeAmountInGroup == shapeAmountInGroupCheck)
-//{
-//    for (int j = 0; j < groupShapes.Count; j++)
-//    {
-//        string[] wordPart = groupShapes[j].Split(' ');
-//        if (wordPart.First().Equals("rectangle"))
-//        {
-//            location = new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2]));
-//            size = new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4]));
-//            //return hij goed?
-//            createRectangle(location, size);
-//            groupShapes.RemoveAt(j);
-//        }
-//        else if (wordPart.First().Equals("ellipse"))
-//        {
-//            location = new Point(int.Parse(wordParts[1]), int.Parse(wordParts[2]));
-//            size = new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4]));
-//            //return hij goed?
-//            createEllipse(location, size);
-//            groupShapes.RemoveAt(j);
-//        }
-//        else
-//        {
-//            ornament = groupShapes[j];
-//        }
-//    }//endforeach                        
-//}//endif
