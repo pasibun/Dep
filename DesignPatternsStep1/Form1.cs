@@ -227,13 +227,13 @@ namespace DesignPatternsStep1
 
             if (composites.Count == 0)
             {
-                //if (shapes[selectedShape] is RectangleShape)
-                //{
+                if (shapes[selectedShape] is RectangleShape)
+                {
                 shapes[selectedShape] = new RectangleShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
 
-                // }
-                //else
-                //    shapes[selectedShape] = new EllipseShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId);
+                 }
+                else
+                    shapes[selectedShape] = new EllipseShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
 
                 shapes[selectedShape].DrawShape(shapes[selectedShape].X, shapes[selectedShape].Y, shapes[selectedShape].Width, shapes[selectedShape].Height, bluePen);
             }
