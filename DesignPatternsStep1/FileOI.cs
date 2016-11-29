@@ -12,7 +12,6 @@ namespace DesignPatternsStep1
     {
         int spaces;
         string group = "group";
-        private int addSpaces;
         List<string> exportList = new List<string>();
         List<Composite> compList = new List<Composite>();
         private string[] lines;
@@ -22,7 +21,6 @@ namespace DesignPatternsStep1
         private Size size;
         private int countSpaces;
         private int countSpaces2;
-        private string ornament = "";
         private List<string> groupShapes;
         private string[] wordParts;
         List<Shape> noGroupShapes;
@@ -153,9 +151,9 @@ namespace DesignPatternsStep1
         }
 
         public List<string> exportFile(List<Composite> composites)
-        {           
+        {
             noGroupShapes = Form1.drawnShapes;
-            spaces = 12;          
+            spaces = 12;
             foreach (Composite c in composites)
             {
                 if (!c.groepInGroup)
@@ -165,8 +163,8 @@ namespace DesignPatternsStep1
                 }
                 else
                 {
-                }    
-            }            
+                }
+            }
             return exportList; ;
         }
 
@@ -182,7 +180,7 @@ namespace DesignPatternsStep1
                 }
                 else
                 {
-                    exportList.Add(group.PadLeft(7) + " " + compList[groupIngroup -1].subordinates.Count.ToString());                    
+                    exportList.Add(group.PadLeft(7) + " " + compList[groupIngroup - 1].subordinates.Count.ToString());
                     return export(compList[groupIngroup - 1], spaces + 2, 0, groupIngroup - 1);
                 }
             }
