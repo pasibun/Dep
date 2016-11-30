@@ -89,6 +89,7 @@ namespace DesignPatternsStep1
         private Point position;
         private Size size;
         public bool groepInGroup = false;
+        public int compositeIndex = 0;
 
         public List<CompositePattern> subordinates = new List<CompositePattern>();
 

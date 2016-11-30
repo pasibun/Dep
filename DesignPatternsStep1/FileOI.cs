@@ -29,6 +29,8 @@ namespace DesignPatternsStep1
         Composite comp;
         Leaf leaf;
 
+        int depthIndex = 0;
+
         //Wat nog moet is dat hij verwijdert wordt ui de wordpart shit.
 
         /* Deze functie zorgt er voor dat een gebruiker een bestand kan toevoegen om verschillende shapes toe te voegen.
@@ -165,22 +167,32 @@ namespace DesignPatternsStep1
                 {
                 }
             }
-            return exportList; ;
+            return exportList; 
         }
 
+        string x = null;
         private bool export(Composite c, int spaces, int totalInGroup, int groupIngroup)
         {
             string rectangle = "rectangle ";
             string ellipse = "ellipse ";
+            
             if (c.subordinates.Count.Equals(totalInGroup))
             {
                 if (groupIngroup.Equals(0))
                 {
+                    //depthIndex = 0;
+
                     return true;
                 }
                 else
                 {
-                    exportList.Add(group.PadLeft(7) + " " + compList[groupIngroup - 1].subordinates.Count.ToString());
+                    for (int i = 0; i < compList[groupIngroup-1].compositeIndex; i++)
+                    {
+                        x = x + "\t ";
+                    }
+
+                    exportList.Add(x + group + " " + compList[groupIngroup - 1].subordinates.Count.ToString());
+                    x = null;
                     return export(compList[groupIngroup - 1], spaces + 2, 0, groupIngroup - 1);
                 }
             }
@@ -198,18 +210,33 @@ namespace DesignPatternsStep1
                 }
                 else
                 {
+                    if (groupIngroup == 0)
+                    {
+                        compList.Clear();
+                    }
+
+                    //depthIndex++;
                     compList.Add(c.subordinates[totalInGroup] as Composite);
+                    x = null;
                     return export(c, spaces, totalInGroup + 1, groupIngroup + 1);
                 }
             }
         }
 
+        string z = null;
         private void formatter(Composite c, string shape, int totalInGroup, int spaces)
         {
-            exportList.Add(shape.PadLeft(spaces) + c.subordinates[totalInGroup].GetShape().X +
+            for (int i = 0; i < c.compositeIndex + 1; i++)
+            {
+                z = z + "\t ";
+            }
+
+            exportList.Add(z + shape + c.subordinates[totalInGroup].GetShape().X +
                             " " + c.subordinates[totalInGroup].GetShape().Y + " " + c.subordinates[totalInGroup].GetShape().Width +
                             " " + c.subordinates[totalInGroup].GetShape().Height);
             removeShapeFromGroup(c.subordinates[totalInGroup].GetShape());
+
+            z = null;
         }
 
         public void removeShapeFromGroup(Shape shape)

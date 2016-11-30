@@ -142,8 +142,7 @@ namespace DesignPatternsStep1
                     drawnShapes[i].DrawShape(drawnShapes[i].X, drawnShapes[i].Y, drawnShapes[i].Width, drawnShapes[i].Height, bluePen);
 
                     if (comp != null && !resize.Checked && !moveCheckBox.Checked)
-                    {
-                        
+                    {                        
                             leaf = new Leaf(drawnShapes[i]);
                             comp.AddSubordinate(leaf);
                             drawnShapes[i].InGroup = true;                        
@@ -407,6 +406,7 @@ namespace DesignPatternsStep1
             if (compositeBox.SelectedIndex > -1)
             {
                 composites[compositeBox.SelectedIndex].AddSubordinate(comp);
+                comp.compositeIndex = composites[compositeBox.SelectedIndex].compositeIndex + 1;
                 comp.groepInGroup = true;
             }
 
@@ -415,7 +415,6 @@ namespace DesignPatternsStep1
             {
                 compositeBox.Items.Add(composites[i].name + " " + composites[i].compositeSize);
             }
-            //compositeBox.DataSource = composites;
 
             compositeBox.ClearSelected();
         }
