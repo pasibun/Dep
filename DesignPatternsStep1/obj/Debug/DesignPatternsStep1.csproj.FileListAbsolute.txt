@@ -1,57 +1,9 @@
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-c:\users\jylti\documents\visual studio 2015\Projects\DesignPatternsStep1\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\Visual Studio 2015\Projects\DesignPatternsStep2\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
-C:\Users\jylti\Documents\DesignPatternsStep2Test\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
-C:\Users\jylti\Documents\DesignPatternsStep3\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-<<<<<<< HEAD
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
-C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-=======
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe.config
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.exe
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
->>>>>>> b179e8fff194f68045fe970d217fe8ca718dd388
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache

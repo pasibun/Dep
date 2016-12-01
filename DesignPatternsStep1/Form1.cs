@@ -320,72 +320,7 @@ namespace DesignPatternsStep1
         {
             rec.RedoAction();           
         }
-
-        public class Receiver
-        {
-            Form1 form = new Form1();
-            Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
-
-            Pen redPen = new Pen(Color.Red);
-
-            private Stack<CommandPattern> _Undocommands = new Stack<CommandPattern>();
-            private Stack<CommandPattern> _Redocommands = new Stack<CommandPattern>();
-
-            public void UndoAction()
-            {
-                if (_Undocommands.Count > 0)
-                {
-                    CommandPattern command = _Undocommands.Pop();
-                    command.UnExecute();
-                    _Redocommands.Push(command);
-                }
-            }
-
-            public void RedoAction()
-            {
-                if (_Redocommands.Count > 0)
-                {
-                    CommandPattern command = _Redocommands.Pop();
-                    command.Execute();
-                    _Undocommands.Push(command);
-                }
-            }
-
-            public void InsertInUndoRedoForDraw(Shape shape, int x, int y, int width, int height, Form1 form)
-            {
-                CommandPattern command = new DrawCommand( shape,  x,  y,  width,  height,  form);
-                _Undocommands.Push(command);
-                _Redocommands.Clear();
-            }
-
-            public void InsertInUndoRedoForResize(Shape shape, int width, int height, Form1 form)
-            {
-                CommandPattern command = new ResizeCommand(shape, width, height, form);
-                _Undocommands.Push(command);
-                _Redocommands.Clear();
-            }
-
-            public void InsertInUndoRedoForMove(Shape shape, int newX, int newY, Form1 form)
-            {
-                CommandPattern command = new MoveCommand(shape, newX, newY, form);
-                _Undocommands.Push(command);
-                _Redocommands.Clear();
-            }
-
-        }
-
-        private void importBtn_Click(object sender, EventArgs e)
-        {
-            DialogResult result = importFileDialog.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                string file = importFileDialog.FileName;
-                FileIO f = new FileIO();
-                f.importFile(file);
-            }
-        }
-
+              
         private void newGroupBtn_Click(object sender, EventArgs e)
         {
             comp = new Composite("Group", new Point(0,0), new Size(50,50));
@@ -427,7 +362,6 @@ namespace DesignPatternsStep1
             export.Filter = "text *.txt|*.txt";
             export.FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\exportfile.txt";
 
-
             if (export.ShowDialog() == DialogResult.OK)
             {
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(@export.FileName))
@@ -439,6 +373,77 @@ namespace DesignPatternsStep1
                 }
             }
         }
+
+        private void importBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = importFileDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                string file = importFileDialog.FileName;
+                FileIO f = new FileIO();
+                List<Composite> temp = f.importFile(file).ToList();
+                foreach (Composite c in temp)
+                {
+                    composites.Add(c);
+                    compositeBox.Items.Add(c.name + " " + c.compositeSize);
+                }
+            }
+        }
+
+        public class Receiver
+        {
+            Form1 form = new Form1();
+            Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
+
+            Pen redPen = new Pen(Color.Red);
+
+            private Stack<CommandPattern> _Undocommands = new Stack<CommandPattern>();
+            private Stack<CommandPattern> _Redocommands = new Stack<CommandPattern>();
+
+            public void UndoAction()
+            {
+                if (_Undocommands.Count > 0)
+                {
+                    CommandPattern command = _Undocommands.Pop();
+                    command.UnExecute();
+                    _Redocommands.Push(command);
+                }
+            }
+
+            public void RedoAction()
+            {
+                if (_Redocommands.Count > 0)
+                {
+                    CommandPattern command = _Redocommands.Pop();
+                    command.Execute();
+                    _Undocommands.Push(command);
+                }
+            }
+
+            public void InsertInUndoRedoForDraw(Shape shape, int x, int y, int width, int height, Form1 form)
+            {
+                CommandPattern command = new DrawCommand(shape, x, y, width, height, form);
+                _Undocommands.Push(command);
+                _Redocommands.Clear();
+            }
+
+            public void InsertInUndoRedoForResize(Shape shape, int width, int height, Form1 form)
+            {
+                CommandPattern command = new ResizeCommand(shape, width, height, form);
+                _Undocommands.Push(command);
+                _Redocommands.Clear();
+            }
+
+            public void InsertInUndoRedoForMove(Shape shape, int newX, int newY, Form1 form)
+            {
+                CommandPattern command = new MoveCommand(shape, newX, newY, form);
+                _Undocommands.Push(command);
+                _Redocommands.Clear();
+            }
+
+        }
+
     }
 }     
 
