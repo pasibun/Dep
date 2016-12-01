@@ -209,106 +209,19 @@ namespace DesignPatternsStep1
                 }
             }
         }
+
+        Move moveVisitor;
         private void MoveShape(List<Shape> shapes, int selectedShape, MouseEventArgs e, bool drawRectangle)
         {
-            int deltaX = 0;
-            int deltaY = 0;
-
-            int offset = 25;
-
-            if (shapes[selectedShape].X < e.X)
-                deltaX = e.X - shapes[selectedShape].X;
-
-            if (shapes[selectedShape].Y < e.Y)
-                deltaY = e.Y - shapes[selectedShape].Y;
-
-            Refresh();
-
-            if (composites.Count == 0)
-            {
-                if (shapes[selectedShape] is RectangleShape)
-                {
-                shapes[selectedShape] = new RectangleShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                 }
-                else
-                    shapes[selectedShape] = new EllipseShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                shapes[selectedShape].DrawShape(shapes[selectedShape].X, shapes[selectedShape].Y, shapes[selectedShape].Width, shapes[selectedShape].Height, bluePen);
-            }
-            else if (composites.Count > 0)
-            {
-                if (!drawnShapes[selectedShape].InGroup)
-                {
-                    if (shapes[selectedShape] is RectangleShape)
-                    {
-                    shapes[selectedShape] = new RectangleShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                     }
-                    else
-                        shapes[selectedShape] = new EllipseShape(this, new Point(MousePosition.X - shapes[selectedShape].Width / 2, MousePosition.Y - shapes[selectedShape].Height), new Size(shapes[selectedShape].Width, shapes[selectedShape].Height), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                    shapes[selectedShape].DrawShape(shapes[selectedShape].X, shapes[selectedShape].Y, shapes[selectedShape].Width, shapes[selectedShape].Height, bluePen);
-                }
-                else
-                {
-                    foreach (Composite c in composites)
-                    {
-                        for (int j = 0; j < c.subordinates.Count; j++)
-                        {
-                            if (c.subordinates[j].GetShapeId().Equals(drawnShapes[selectedShape].ShapeId))
-                            {
-                                c.MoveObject(deltaX, deltaY);
-                            }
-                        }
-                    }
-                }
-            }
+            moveVisitor = new Move(e, composites);
+            shapes[selectedShape].Accept(moveVisitor);
         }
 
+        Resize resizeVisitor;
         private void ResizeShape(List<Shape> shapes, int selectedShape, MouseEventArgs e, bool drawRectangle)
         {
-            int newWidth = 0;
-            int newHeight = 0;
-
-            if (shapes[selectedShape].X < e.X)
-                newWidth = e.X - shapes[selectedShape].X;
-
-            if (shapes[selectedShape].X > e.X)
-                newWidth = shapes[selectedShape].X - e.X;
-
-            if (shapes[selectedShape].Y < e.Y)
-                newHeight = e.Y - shapes[selectedShape].Y;
-
-            if (shapes[selectedShape].Y > e.Y)
-                newHeight = shapes[selectedShape].Y - e.Y;
-
-            Refresh();
-            if (!drawnShapes[selectedShape].InGroup)
-            {
-                if (shapes[selectedShape] is RectangleShape)
-                {
-                    shapes[selectedShape] = new RectangleShape(this, new Point(shapes[selectedShape].X, shapes[selectedShape].Y), new Size(newWidth, newHeight), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                }
-                else
-                    shapes[selectedShape] = new EllipseShape(this, new Point(shapes[selectedShape].X, shapes[selectedShape].Y), new Size(newWidth, newHeight), shapes[selectedShape].ShapeId, drawnShapes[selectedShape].InGroup);
-
-                shapes[selectedShape].DrawShape(shapes[selectedShape].X, shapes[selectedShape].Y, shapes[selectedShape].Width, shapes[selectedShape].Height, bluePen);
-            }
-            else
-            {
-                foreach (Composite c in composites)
-                {
-                    for (int j = 0; j < c.subordinates.Count; j++)
-                    {
-                        if (c.subordinates[j].GetShapeId().Equals(drawnShapes[selectedShape].ShapeId))
-                        {
-                            c.resizeGroup(newWidth, newHeight);
-                        }
-                    }
-                }
-            }
+            resizeVisitor = new Resize(e, composites);
+            shapes[selectedShape].Accept(resizeVisitor);
         }
 
         private void UndoButton_Click(object sender, EventArgs e)

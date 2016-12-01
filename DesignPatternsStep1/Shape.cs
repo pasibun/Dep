@@ -58,6 +58,11 @@ namespace DesignPatternsStep1
             InGroup = inGroup;
         }
 
+        public void Accept(VisitorPattern v)
+        {
+            v.Visit(this.shapeId);
+        }
+
         public virtual void DrawShape(int x, int y, int Width, int Height, Pen pen)
         {
             shape = new Rectangle(x, y, Width, Height);
