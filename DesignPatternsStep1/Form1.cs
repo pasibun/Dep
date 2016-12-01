@@ -9,7 +9,8 @@ namespace DesignPatternsStep1
     public partial class Form1 : Form
     {
         public static List<Shape> drawnShapes = new List<Shape>();
-        public static List<Shape> shapeCache = new List<Shape>();  
+        public static List<Shape> shapeCache = new List<Shape>();
+        public static List<string> exportList = new List<string>();
 
         public int selectedShape = -1;
         private int commandIndex = 0;
@@ -47,6 +48,9 @@ namespace DesignPatternsStep1
         List<Composite> composites = new List<Composite>();
         Composite comp;
         Leaf leaf;
+        Move moveVisitor;
+        Resize resizeVisitor;
+        Export exportVisitor;
 
         public Form1()
         {
@@ -210,14 +214,13 @@ namespace DesignPatternsStep1
             }
         }
 
-        Move moveVisitor;
+        
         private void MoveShape(List<Shape> shapes, int selectedShape, MouseEventArgs e, bool drawRectangle)
         {
             moveVisitor = new Move(e, composites);
             shapes[selectedShape].Accept(moveVisitor);
         }
-
-        Resize resizeVisitor;
+                
         private void ResizeShape(List<Shape> shapes, int selectedShape, MouseEventArgs e, bool drawRectangle)
         {
             resizeVisitor = new Resize(e, composites);
@@ -269,8 +272,9 @@ namespace DesignPatternsStep1
 
         private void exportBtn_Click(object sender, EventArgs e)
         {
-            FileIO f = new FileIO();
-            List<string> exportList = f.exportFile(composites);
+            exportVisitor = new Export(composites);
+            FileIO.Accept(exportVisitor);
+
             FileDialog export = new SaveFileDialog();
             export.Filter = "text *.txt|*.txt";
             export.FileName = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\exportfile.txt";
