@@ -25,11 +25,13 @@ namespace DesignPatternsStep1
         protected List<Label> ornamentListLabel = new List<Label>();
 
         private Shape s;
+        private Composite c;
         private string text;
 
-        public Shape(Shape s, string text)
+        public Shape(Shape s, Composite c, string text)
         {
             this.s = s;
+            this.c = c;
             this.ornamentText = text;
         }
 

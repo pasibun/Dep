@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DesignPatternsStep1
 {
-    abstract class CompositePattern
+    public abstract class CompositePattern
     {
         public abstract void resizeGroup(int newWidth, int newHeight);
         public abstract void MoveObject(int deltaX, int deltaY);
@@ -17,7 +17,7 @@ namespace DesignPatternsStep1
         public abstract int GetShapeId();
     }
 
-    class Leaf : CompositePattern
+    public class Leaf : CompositePattern
     {
         public Shape shape;
 
@@ -82,7 +82,7 @@ namespace DesignPatternsStep1
         }
     }
 
-    class Composite : CompositePattern
+    public class Composite : CompositePattern
     {
         public String name;
         public int compositeSize = 0;

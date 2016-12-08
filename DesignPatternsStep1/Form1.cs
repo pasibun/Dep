@@ -198,9 +198,11 @@ namespace DesignPatternsStep1
                     Point location2 = new Point(comp.subordinates[stop + 1].GetShape().X, comp.subordinates[stop + 1].GetShape().Y);
                     if (location1.X > location2.X)
                     {
-                        maxXY.X = location1.X;
+                        maxXY.X = location1.X + comp.subordinates[stop].GetShape().Width;
                         if (location1.Y > location2.Y)
-                            maxXY.Y = location1.Y;
+                            maxXY.Y = location1.Y + comp.subordinates[stop].GetShape().Height; 
+                        else if (location1.Y < location2.Y)
+                            maxXY.Y = location2.Y + comp.subordinates[stop].GetShape().Height;
                         return determineGroupSize(comp, stop + 1, groupInGroup);
                     }
                     else if (location1.X < location2.X)
@@ -208,6 +210,8 @@ namespace DesignPatternsStep1
                         minXY.X = location1.X;
                         if (location1.Y < location2.Y)
                             minXY.Y = location1.Y;
+                        else if (location1.Y > location2.Y)
+                            minXY.Y = location2.Y;
                         return determineGroupSize(comp, stop + 1, groupInGroup);
                     }
                     return determineGroupSize(comp, stop + 1, groupInGroup);
@@ -215,11 +219,11 @@ namespace DesignPatternsStep1
                 else
                 {
                     if (comp.subordinates[stop].GetShape().X > maxXY.X)
-                        maxXY.X = comp.subordinates[stop].GetShape().X;
+                        maxXY.X = comp.subordinates[stop].GetShape().X + comp.subordinates[stop].GetShape().Width;
                     else if (comp.subordinates[stop].GetShape().X < minXY.X)
                         minXY.X = comp.subordinates[stop].GetShape().X;
                     if (comp.subordinates[stop].GetShape().Y > maxXY.Y)
-                        maxXY.Y = comp.subordinates[stop].GetShape().Y;
+                        maxXY.Y = comp.subordinates[stop].GetShape().Y + comp.subordinates[stop].GetShape().Height;
                     else if (comp.subordinates[stop].GetShape().Y < minXY.Y)
                         minXY.Y = comp.subordinates[stop].GetShape().Y;
                     return determineGroupSize(comp, stop + 1, groupInGroup);
@@ -483,12 +487,12 @@ namespace DesignPatternsStep1
         {
             if (compositeBox.SelectedIndex > -1)
             {
-                OrnamentForm ornForm = new OrnamentForm(null, true);
+                OrnamentForm ornForm = new OrnamentForm(null, composites[compositeBox.SelectedIndex]);
                 ornForm.Show();
             }
-            if (!selectedShape.Equals(-1))
+            else if(!selectedShape.Equals(-1))
             {
-                OrnamentForm ornForm = new OrnamentForm(drawnShapes[selectedShape], false);
+                OrnamentForm ornForm = new OrnamentForm(drawnShapes[selectedShape], null);
                 ornForm.Show();
             }
             else MessageBox.Show("Please select a shape first!");
