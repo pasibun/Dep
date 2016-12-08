@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DesignPatternsStep1
@@ -7,7 +8,7 @@ namespace DesignPatternsStep1
     {
         protected Control m_frmRef;
         protected Point location;
-        protected Size size;
+        protected Size size;       
 
         protected Rectangle shape;
         protected Graphics formGraphics;
@@ -19,9 +20,66 @@ namespace DesignPatternsStep1
         protected bool drawn = false;
         protected bool inGroup = false;
 
+        protected Point ornamentLocation;
+        protected string ornamentText;
+        protected List<Label> ornamentListLabel = new List<Label>();
+
+        private Shape s;
+        private string text;
+
+        public Shape(Shape s, string text)
+        {
+            this.s = s;
+            this.ornamentText = text;
+        }
+
+        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> labels) 
+        {
+            m_frmRef = FormToDrawOn;
+            location = shapeLocation;
+            size = shapeSize;
+            ShapeId = shapeId;
+            InGroup = inGroup;
+            this.ornamentListLabel = labels;
+        }
+
+        public void Accept(VisitorPattern v)
+        {
+            v.Visit(this.shapeId);
+        }
+
+        public virtual void DrawShape(int x, int y, int Width, int Height, Pen pen)
+        {
+            shape = new Rectangle(x, y, Width, Height);
+            formPen = new Pen(pen.Color);
+        }
+
+        public List<Label> OrnamentList
+        {
+            get { return ornamentListLabel; }
+            set { ornamentListLabel = value; }
+        }
+
+        public string OrnamentText
+        {
+            get { return ornamentText; }
+            set { ornamentText = value; }
+        }
+
+        public Point OrnamentLocation
+        {
+            get { return ornamentLocation; }
+            set { ornamentLocation = value; }
+        }
+
+        public bool Contains(int x, int y)
+        {
+            return shape.Contains(x,y);
+        }
+
         public int ShapeId
         {
-            get {return shapeId; }
+            get { return shapeId; }
             set { shapeId = value; }
         }
 
@@ -49,31 +107,6 @@ namespace DesignPatternsStep1
             set { resized = value; }
         }
 
-        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup) 
-        {
-            m_frmRef = FormToDrawOn;
-            location = shapeLocation;
-            size = shapeSize;
-            ShapeId = shapeId;
-            InGroup = inGroup;
-        }
-
-        public void Accept(VisitorPattern v)
-        {
-            v.Visit(this.shapeId);
-        }
-
-        public virtual void DrawShape(int x, int y, int Width, int Height, Pen pen)
-        {
-            shape = new Rectangle(x, y, Width, Height);
-            formPen = new Pen(pen.Color);
-        }
-
-        public bool Contains(int x, int y)
-        {
-            return shape.Contains(x,y);
-        }
-        
         public int X
         {
             get { return location.X; }

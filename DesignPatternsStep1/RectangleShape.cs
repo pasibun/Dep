@@ -10,7 +10,7 @@ namespace DesignPatternsStep1
 {
     class RectangleShape : Shape
     {
-        public RectangleShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup) : base(FormToDrawOn, Location, Size, shapeId, inGroup)
+        public RectangleShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup, List<Label> labels) : base(FormToDrawOn, Location, Size, shapeId, inGroup, labels)
         { }
 
         public override void DrawShape(int x, int y, int Width, int Height, Pen pen)

@@ -46,9 +46,9 @@ namespace DesignPatternsStep1
         {
             if (shape is RectangleShape)
             {
-                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup);
+                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList);
             }
-            else shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup);
+            else shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList);
 
             lastOpenedForm.Refresh();
 
@@ -67,9 +67,9 @@ namespace DesignPatternsStep1
             shape.Y = shape.Y + deltaY - 25;
 
             if(shape is RectangleShape)
-                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup);
+                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
             else
-                shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup);
+                shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
 
             lastOpenedForm.Refresh();
             for (int i = 0; i < Form1.drawnShapes.Count; ++i)
@@ -104,6 +104,18 @@ namespace DesignPatternsStep1
         {
             get { return groepInGroup; }
             set { groepInGroup = value; }
+        }
+
+        public Size Size
+        {
+            get { return size; }
+            set { size = value; }
+        }
+
+        public Point Position
+        {
+            get { return position; }
+            set { position = value; }
         }
 
         public override void resizeGroup(int newWidth, int newHeight)
