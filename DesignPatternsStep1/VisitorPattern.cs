@@ -60,13 +60,13 @@ namespace DesignPatternsStep1
                 if (Form1.drawnShapes[selectedShape] is RectangleShape)
                 {
                     //moveOrnament(Form1.drawnShapes[selectedShape]);
-                    Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y), new Size(newWidth, newHeight), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
+                    Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y), new Size(newWidth, newHeight), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
 
                 }
                 else
                 {
                     //moveOrnament(Form1.drawnShapes[selectedShape]);
-                    Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y), new Size(newWidth, newHeight), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
+                    Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y), new Size(newWidth, newHeight), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
                 }
 
                 Form1.drawnShapes[selectedShape].DrawShape(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y, Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height, new Pen(Color.Blue));
@@ -120,10 +120,10 @@ namespace DesignPatternsStep1
             if (composites.Count == 0)
             {
                 if (Form1.drawnShapes[selectedShape] is RectangleShape)
-                    Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
+                    Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
                 else
-                    Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
-                
+                    Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
+
                 Form1.drawnShapes[selectedShape].DrawShape(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y, Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height, new Pen(Color.Blue));
             }
             else if (composites.Count > 0)
@@ -131,10 +131,10 @@ namespace DesignPatternsStep1
                 if (!Form1.drawnShapes[selectedShape].InGroup)
                 {
                     if (Form1.drawnShapes[selectedShape] is RectangleShape)
-                        Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
+                        Form1.drawnShapes[selectedShape] = new RectangleShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
                     else
-                        Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList);
-                    
+                        Form1.drawnShapes[selectedShape] = new EllipseShape(lastOpenedForm, new Point(Form1.MousePosition.X - Form1.drawnShapes[selectedShape].Width / 2, Form1.MousePosition.Y - Form1.drawnShapes[selectedShape].Height), new Size(Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height), Form1.drawnShapes[selectedShape].ShapeId, Form1.drawnShapes[selectedShape].InGroup, Form1.drawnShapes[selectedShape].OrnamentList, Form1.drawnShapes[selectedShape].ShapeIndex);
+
                     Form1.drawnShapes[selectedShape].DrawShape(Form1.drawnShapes[selectedShape].X, Form1.drawnShapes[selectedShape].Y, Form1.drawnShapes[selectedShape].Width, Form1.drawnShapes[selectedShape].Height, new Pen(Color.Blue));
                 }
                 else
@@ -188,9 +188,15 @@ namespace DesignPatternsStep1
                 if (!noGroupShapes[i].InGroup)
                 {
                     if (noGroupShapes[i] is RectangleShape)
+                    {
+                        ornamentCheck(noGroupShapes[i], null);
                         exportList.Add("rectangle " + noGroupShapes[i].X + " " + noGroupShapes[i].Y + " " + noGroupShapes[i].Width + " " + noGroupShapes[i].Height);
+                    }
                     else if (noGroupShapes[i] is EllipseShape)
+                    {
+                        ornamentCheck(noGroupShapes[i], null);
                         exportList.Add("ellipse " + noGroupShapes[i].X + " " + noGroupShapes[i].Y + " " + noGroupShapes[i].Width + " " + noGroupShapes[i].Height);
+                    }
                 }
             }
 
@@ -220,17 +226,11 @@ namespace DesignPatternsStep1
             if (c.subordinates.Count.Equals(totalInGroup))
             {
                 if (groupIngroup.Equals(0))
-                {
-                    //depthIndex = 0;
-
                     return true;
-                }
                 else
                 {
                     for (int i = 0; i < compList[groupIngroup - 1].compositeIndex; i++)
-                    {
                         x = x + "\t ";
-                    }
 
                     exportList.Add(x + group + " " + compList[groupIngroup - 1].subordinates.Count.ToString());
                     x = null;
@@ -241,22 +241,22 @@ namespace DesignPatternsStep1
             {
                 if (c.subordinates[totalInGroup].GetShape() is RectangleShape)
                 {
-                    formatter(c, rectangle, totalInGroup, spaces);
+                    ornamentCheck(c.subordinates[totalInGroup].GetShape(), null);
+                    formatterShapes(c, rectangle, totalInGroup);
                     return export(c, spaces, totalInGroup + 1, groupIngroup);
                 }
                 if (c.subordinates[totalInGroup].GetShape() is EllipseShape)
                 {
-                    formatter(c, ellipse, totalInGroup, spaces);
+                    ornamentCheck(c.subordinates[totalInGroup].GetShape(), null);
+                    formatterShapes(c, ellipse, totalInGroup);
                     return export(c, spaces, totalInGroup + 1, groupIngroup);
                 }
                 else
                 {
                     if (groupIngroup == 0)
-                    {
                         compList.Clear();
-                    }
 
-                    //depthIndex++;
+                    ornamentCheck(null, c.subordinates[totalInGroup] as Composite);
                     compList.Add(c.subordinates[totalInGroup] as Composite);
                     x = null;
                     return export(c, spaces, totalInGroup + 1, groupIngroup + 1);
@@ -265,7 +265,7 @@ namespace DesignPatternsStep1
         }
 
         //format the shapes to the proper way with tabs if this is necessary
-        private void formatter(Composite c, string shape, int totalInGroup, int spaces)
+        private void formatterShapes(Composite c, string shape, int totalInGroup)
         {
             for (int i = 0; i < c.compositeIndex + 1; i++)
             {
@@ -280,6 +280,30 @@ namespace DesignPatternsStep1
             z = null;
         }
 
+        private void formatterOrnaments(Composite c, Shape s, List<Label> ornamentlist)
+        {
+            string orn = "ornament";
+            foreach (Label a in ornamentlist)
+            {
+                if (c != null)
+                {
+                    for (int i = 0; i < c.compositeIndex + 1; i++)
+                    {
+                        z = z + "\t ";
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < s.ShapeIndex + 1; i++)
+                    {
+                        z = z + "\t ";
+                    }
+                }
+                exportList.Add(z + orn + " " + a.Name + " " + "\"" + a.Text + "\"");
+                z = null;
+            }
+        }
+
         private void removeShapeFromGroup(Shape shape)
         {
             for (int i = 0; i < noGroupShapes.Count; i++)
@@ -289,6 +313,17 @@ namespace DesignPatternsStep1
                     noGroupShapes.Remove(noGroupShapes[i]);
                 }
             }
+        }
+
+        private void ornamentCheck(Shape s, Composite c)
+        {
+            if (s == null)
+            {
+                if (c.groupOrnaments.Count != 0)
+                    formatterOrnaments(c, s, c.groupOrnaments);
+            }
+            else if (s.OrnamentList.Count != 0)
+                formatterOrnaments(null, s, s.OrnamentList);
         }
 
         public override void Visit(int shapeId)

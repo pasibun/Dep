@@ -22,6 +22,7 @@ namespace DesignPatternsStep1
 
         protected Point ornamentLocation;
         protected string ornamentText;
+        protected int shapeIndex = 0;
         protected List<Label> ornamentListLabel = new List<Label>();
 
         private Shape s;
@@ -35,14 +36,15 @@ namespace DesignPatternsStep1
             this.ornamentText = text;
         }
 
-        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> labels) 
+        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> labels, int index) 
         {
-            m_frmRef = FormToDrawOn;
-            location = shapeLocation;
-            size = shapeSize;
-            ShapeId = shapeId;
-            InGroup = inGroup;
-            this.ornamentListLabel = labels;
+            this.m_frmRef = FormToDrawOn;
+            this.location = shapeLocation;
+            this.size = shapeSize;
+            this.ShapeId = shapeId;
+            this.InGroup = inGroup;
+            this.OrnamentList = labels;
+            this.ShapeIndex = index;
         }
 
         public void Accept(VisitorPattern v)
@@ -60,6 +62,12 @@ namespace DesignPatternsStep1
         {
             get { return ornamentListLabel; }
             set { ornamentListLabel = value; }
+        }
+
+        public int ShapeIndex
+        {
+            get { return shapeIndex; }
+            set { shapeIndex = value; }
         }
 
         public string OrnamentText

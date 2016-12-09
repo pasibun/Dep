@@ -46,9 +46,9 @@ namespace DesignPatternsStep1
         {
             if (shape is RectangleShape)
             {
-                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList);
+                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList, shape.ShapeIndex);
             }
-            else shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList);
+            else shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(newWidth, newHeight), shape.ShapeId, shape.InGroup, shape.OrnamentList, shape.ShapeIndex);
 
             lastOpenedForm.Refresh();
 
@@ -67,9 +67,9 @@ namespace DesignPatternsStep1
             shape.Y = shape.Y + deltaY - 25;
 
             if(shape is RectangleShape)
-                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
+                shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList, shape.ShapeIndex);
             else
-                shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
+                shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList, shape.ShapeIndex);
 
             lastOpenedForm.Refresh();
             for (int i = 0; i < Form1.drawnShapes.Count; ++i)
@@ -90,7 +90,7 @@ namespace DesignPatternsStep1
         private Size size;
         public bool groepInGroup = false;
         public int compositeIndex = 0;
-
+        public List<Label> groupOrnaments = new List<Label>();
         public List<CompositePattern> subordinates = new List<CompositePattern>();
 
         public Composite(String name, Point position, Size size)
@@ -104,6 +104,12 @@ namespace DesignPatternsStep1
         {
             get { return groepInGroup; }
             set { groepInGroup = value; }
+        }
+
+        public List<Label> GroupOrnaments
+        {
+            get { return groupOrnaments; }
+            set { groupOrnaments = value; }
         }
 
         public Size Size
@@ -137,7 +143,6 @@ namespace DesignPatternsStep1
         public void AddSubordinate(CompositePattern leaf)
         {
             subordinates.Add(leaf);
-            compositeSize++;
         }
 
         public override Shape GetShape()

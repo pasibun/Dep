@@ -11,7 +11,7 @@ namespace DesignPatternsStep1
         public static List<Shape> drawnShapes = new List<Shape>();
         public static List<Shape> shapeCache = new List<Shape>();
         public static List<string> exportList = new List<string>();
-        private List<Composite> compList = new List<Composite>();
+        public static List<Composite> compList = new List<Composite>();
 
         public int selectedShape = -1;
         private int commandIndex = 0;
@@ -47,7 +47,7 @@ namespace DesignPatternsStep1
         private int oldLocationX;
         private int oldLocationY;
 
-        List<Composite> composites = new List<Composite>();
+        public static List<Composite> composites = new List<Composite>();
         Composite comp;
         Leaf leaf;
         Move moveVisitor;
@@ -70,7 +70,7 @@ namespace DesignPatternsStep1
         {
             if (drawRectangle)
             {
-                RectangleShape rectangleShape = new RectangleShape(this, new Point(x, y), size, commandIndex, false, new List<Label>());
+                RectangleShape rectangleShape = new RectangleShape(this, new Point(x, y), size, commandIndex, false, new List<Label>(), 0);
                 rectangleShape.DrawShape(x, y, size.Width, size.Height, redPen);
                 drawnShapes.Add(rectangleShape);
                 drawRectangle = true;
@@ -80,7 +80,7 @@ namespace DesignPatternsStep1
             }
             if (drawEllipse)
             {
-                EllipseShape ellipseShape = new EllipseShape(this, new Point(x, y), size, commandIndex, false, new List<Label>());
+                EllipseShape ellipseShape = new EllipseShape(this, new Point(x, y), size, commandIndex, false, new List<Label>(), 0);
                 ellipseShape.DrawShape(x, y, size.Width, size.Height, redPen);
                 drawnShapes.Add(ellipseShape);
                 drawEllipse = true;
@@ -175,9 +175,9 @@ namespace DesignPatternsStep1
             }
         }
 
-        Point minXY;
-        Point maxXY;
-        private bool determineGroupSize(Composite comp, int stop, int groupInGroup)
+        public static Point minXY;
+        public static Point maxXY;
+        public static bool determineGroupSize(Composite comp, int stop, int groupInGroup)
         {
             if (stop.Equals(comp.subordinates.Count))
             {
@@ -245,26 +245,26 @@ namespace DesignPatternsStep1
 
                 switch (a.Name.ToString())
                 {
-                    case "Above":
+                    case "top":
                         {
                             a.Location = new Point(s.X + (s.Width / 2), s.Y - 15);
                             Refresh();
                             break;
                         }
-                    case "Below":
+                    case "bottom":
                         {
                             a.Location = new Point(s.X + (s.Width / 2), s.Y + s.Height + 15);
                             Refresh();
                             break;
                         }
-                    case "Left":
+                    case "left":
                         {
                             SizeF stringsSize = g.MeasureString(a.Text, stringfont);
                             a.Location = new Point(s.X - ((int)stringsSize.Width + 25), s.Y + (s.Height / 2));
                             Refresh();
                             break;
                         }
-                    case "Right":
+                    case "right":
                         {
                             a.Location = new Point(s.X + s.Width + 10, s.Y + (s.Height / 2));
                             Refresh();
@@ -300,20 +300,26 @@ namespace DesignPatternsStep1
 
                     if (drawnShapes[i] is RectangleShape)
                     {
-                        drawnShapes[i] = new RectangleShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y), new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId, drawnShapes[i].InGroup, drawnShapes[i].OrnamentList);
+                        drawnShapes[i] = new RectangleShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y), new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId, drawnShapes[i].InGroup, drawnShapes[i].OrnamentList, drawnShapes[i].ShapeIndex);
                     }
                     else
                     {
-                        drawnShapes[i] = new EllipseShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y), new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId, drawnShapes[i].InGroup, drawnShapes[i].OrnamentList);
+                        drawnShapes[i] = new EllipseShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y), new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId, drawnShapes[i].InGroup, drawnShapes[i].OrnamentList, drawnShapes[i].ShapeIndex);
                     }
 
                     drawnShapes[i].DrawShape(drawnShapes[i].X, drawnShapes[i].Y, drawnShapes[i].Width, drawnShapes[i].Height, bluePen);
 
                     if (comp != null && !resize.Checked && !moveCheckBox.Checked && saveGroup)
                     {
-                        leaf = new Leaf(drawnShapes[i]);
+                        leaf = new Leaf(drawnShapes[i]);                        
                         comp.AddSubordinate(leaf);
+                        comp.compositeSize++;
                         drawnShapes[i].InGroup = true;
+                        if (drawnShapes[i].OrnamentList.Count != 0)
+                        {
+                            int countOrn = drawnShapes[i].OrnamentList.Count;
+                            comp.compositeSize = comp.compositeSize + countOrn;
+                        }
                     }
                 }
             }
@@ -351,11 +357,11 @@ namespace DesignPatternsStep1
                         if (drawnShapes[i] is RectangleShape)
                             drawnShapes[i] = new RectangleShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y),
                                 new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId,
-                                drawnShapes[i].InGroup, drawnShapes[i].OrnamentList);
+                                drawnShapes[i].InGroup, drawnShapes[i].OrnamentList, drawnShapes[i].ShapeIndex);
                         else
                             drawnShapes[i] = new EllipseShape(this, new Point(drawnShapes[i].X, drawnShapes[i].Y),
                                 new Size(drawnShapes[i].Width, drawnShapes[i].Height), drawnShapes[i].ShapeId,
-                                drawnShapes[i].InGroup, drawnShapes[i].OrnamentList);
+                                drawnShapes[i].InGroup, drawnShapes[i].OrnamentList, drawnShapes[i].ShapeIndex);
 
                         drawnShapes[i].DrawShape(drawnShapes[i].X, drawnShapes[i].Y, drawnShapes[i].Width,
                             drawnShapes[i].Height, redPen);
@@ -431,6 +437,10 @@ namespace DesignPatternsStep1
                 composites[compositeBox.SelectedIndex].AddSubordinate(comp);
                 comp.compositeIndex = composites[compositeBox.SelectedIndex].compositeIndex + 1;
                 comp.groepInGroup = true;
+                for (int i = 0; i < comp.subordinates.Count; i++)
+                {
+                    comp.subordinates[i].GetShape().ShapeIndex = comp.compositeIndex;
+                }
             }
 
             compositeBox.Items.Clear();
@@ -495,7 +505,7 @@ namespace DesignPatternsStep1
                 OrnamentForm ornForm = new OrnamentForm(drawnShapes[selectedShape], null);
                 ornForm.Show();
             }
-            else MessageBox.Show("Please select a shape first!");
+            else MessageBox.Show("Please select a shape of group first!");
         }
 
         public class Receiver

@@ -15,7 +15,7 @@ namespace DesignPatternsStep1
         public string ornamentText;
 
         public DecoratorPattern(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
-            bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
+            bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels, index)
         { }
 
         public DecoratorPattern(Shape s, Composite c, string text) : base(s, c, text)
@@ -28,15 +28,17 @@ namespace DesignPatternsStep1
 
     class LeftOrnament : DecoratorPattern
     {
+        private Form1 form = Application.OpenForms.Cast<Form>().Last() as Form1;
+
         public LeftOrnament(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
-            bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
+            bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels, index)
         {
         }
 
         public LeftOrnament(Shape s, Composite c, string text) : base(s, c, text)
         {
             Font stringfont = new Font("Microsoft Sans Serif", 8);
-            Graphics g = Form1.ActiveForm.CreateGraphics();
+            Graphics g = form.CreateGraphics();
             SizeF stringsSize = g.MeasureString(text, stringfont);
             if (s == null)
             {
@@ -55,7 +57,7 @@ namespace DesignPatternsStep1
     class RightOrnament : DecoratorPattern
     {
         public RightOrnament(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
-            bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
+            bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels, index)
         {
         }
 
@@ -76,7 +78,7 @@ namespace DesignPatternsStep1
     class AboveOrnament : DecoratorPattern
     {
         public AboveOrnament(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
-            bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
+            bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels, index)
         {
         }
 
@@ -97,7 +99,7 @@ namespace DesignPatternsStep1
     class BelowOrnament : DecoratorPattern
     {
         public BelowOrnament(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
-            bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
+            bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels, index)
         {
         }
 
