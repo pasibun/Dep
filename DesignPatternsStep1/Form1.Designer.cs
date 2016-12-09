@@ -44,15 +44,14 @@
             this.exportBtn = new System.Windows.Forms.Button();
             this.moveCheckBox = new System.Windows.Forms.CheckBox();
             this.compositeBox = new System.Windows.Forms.ListBox();
-            this.ornamentBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // drawEllipseBtn
             // 
-            this.drawEllipseBtn.Location = new System.Drawing.Point(9, 10);
-            this.drawEllipseBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.drawEllipseBtn.Location = new System.Drawing.Point(12, 12);
             this.drawEllipseBtn.Name = "drawEllipseBtn";
-            this.drawEllipseBtn.Size = new System.Drawing.Size(105, 25);
+            this.drawEllipseBtn.Size = new System.Drawing.Size(140, 31);
             this.drawEllipseBtn.TabIndex = 0;
             this.drawEllipseBtn.Text = "Draw Ellipse";
             this.drawEllipseBtn.UseVisualStyleBackColor = true;
@@ -60,10 +59,9 @@
             // 
             // drawRectangleBtn
             // 
-            this.drawRectangleBtn.Location = new System.Drawing.Point(137, 10);
-            this.drawRectangleBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.drawRectangleBtn.Location = new System.Drawing.Point(183, 12);
             this.drawRectangleBtn.Name = "drawRectangleBtn";
-            this.drawRectangleBtn.Size = new System.Drawing.Size(105, 25);
+            this.drawRectangleBtn.Size = new System.Drawing.Size(140, 31);
             this.drawRectangleBtn.TabIndex = 1;
             this.drawRectangleBtn.Text = "Draw Rectangle";
             this.drawRectangleBtn.UseVisualStyleBackColor = true;
@@ -72,28 +70,25 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(395, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(527, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Draw:";
             // 
             // selectedLabel
             // 
             this.selectedLabel.AutoSize = true;
-            this.selectedLabel.Location = new System.Drawing.Point(450, 15);
-            this.selectedLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.selectedLabel.Location = new System.Drawing.Point(600, 19);
             this.selectedLabel.Name = "selectedLabel";
-            this.selectedLabel.Size = new System.Drawing.Size(0, 13);
+            this.selectedLabel.Size = new System.Drawing.Size(0, 17);
             this.selectedLabel.TabIndex = 3;
             // 
             // noneButton
             // 
-            this.noneButton.Location = new System.Drawing.Point(266, 10);
-            this.noneButton.Margin = new System.Windows.Forms.Padding(2);
+            this.noneButton.Location = new System.Drawing.Point(354, 12);
             this.noneButton.Name = "noneButton";
-            this.noneButton.Size = new System.Drawing.Size(105, 25);
+            this.noneButton.Size = new System.Drawing.Size(140, 31);
             this.noneButton.TabIndex = 4;
             this.noneButton.Text = "None";
             this.noneButton.UseVisualStyleBackColor = true;
@@ -102,20 +97,18 @@
             // resize
             // 
             this.resize.AutoSize = true;
-            this.resize.Location = new System.Drawing.Point(10, 79);
-            this.resize.Margin = new System.Windows.Forms.Padding(2);
+            this.resize.Location = new System.Drawing.Point(14, 97);
             this.resize.Name = "resize";
-            this.resize.Size = new System.Drawing.Size(58, 17);
+            this.resize.Size = new System.Drawing.Size(73, 21);
             this.resize.TabIndex = 6;
             this.resize.Text = "Resize";
             this.resize.UseVisualStyleBackColor = true;
             // 
             // UndoButton
             // 
-            this.UndoButton.Location = new System.Drawing.Point(9, 137);
-            this.UndoButton.Margin = new System.Windows.Forms.Padding(2);
+            this.UndoButton.Location = new System.Drawing.Point(12, 169);
             this.UndoButton.Name = "UndoButton";
-            this.UndoButton.Size = new System.Drawing.Size(56, 19);
+            this.UndoButton.Size = new System.Drawing.Size(75, 23);
             this.UndoButton.TabIndex = 7;
             this.UndoButton.Text = "Undo";
             this.UndoButton.UseVisualStyleBackColor = true;
@@ -123,10 +116,9 @@
             // 
             // RedoButton
             // 
-            this.RedoButton.Location = new System.Drawing.Point(9, 162);
-            this.RedoButton.Margin = new System.Windows.Forms.Padding(2);
+            this.RedoButton.Location = new System.Drawing.Point(12, 199);
             this.RedoButton.Name = "RedoButton";
-            this.RedoButton.Size = new System.Drawing.Size(56, 19);
+            this.RedoButton.Size = new System.Drawing.Size(75, 23);
             this.RedoButton.TabIndex = 8;
             this.RedoButton.Text = "Redo";
             this.RedoButton.UseVisualStyleBackColor = true;
@@ -134,10 +126,9 @@
             // 
             // importBtn
             // 
-            this.importBtn.Location = new System.Drawing.Point(9, 185);
-            this.importBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.importBtn.Location = new System.Drawing.Point(12, 228);
             this.importBtn.Name = "importBtn";
-            this.importBtn.Size = new System.Drawing.Size(56, 19);
+            this.importBtn.Size = new System.Drawing.Size(75, 23);
             this.importBtn.TabIndex = 9;
             this.importBtn.Text = "Import";
             this.importBtn.UseVisualStyleBackColor = true;
@@ -149,10 +140,9 @@
             // 
             // newGroupBtn
             // 
-            this.newGroupBtn.Location = new System.Drawing.Point(9, 40);
-            this.newGroupBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.newGroupBtn.Location = new System.Drawing.Point(12, 49);
             this.newGroupBtn.Name = "newGroupBtn";
-            this.newGroupBtn.Size = new System.Drawing.Size(104, 26);
+            this.newGroupBtn.Size = new System.Drawing.Size(139, 32);
             this.newGroupBtn.TabIndex = 10;
             this.newGroupBtn.Text = "New Group";
             this.newGroupBtn.UseVisualStyleBackColor = true;
@@ -160,10 +150,9 @@
             // 
             // showGroupsBtn
             // 
-            this.showGroupsBtn.Location = new System.Drawing.Point(137, 41);
-            this.showGroupsBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.showGroupsBtn.Location = new System.Drawing.Point(183, 50);
             this.showGroupsBtn.Name = "showGroupsBtn";
-            this.showGroupsBtn.Size = new System.Drawing.Size(105, 25);
+            this.showGroupsBtn.Size = new System.Drawing.Size(140, 31);
             this.showGroupsBtn.TabIndex = 11;
             this.showGroupsBtn.Text = "Show Groups";
             this.showGroupsBtn.UseVisualStyleBackColor = true;
@@ -171,10 +160,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(266, 41);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(354, 50);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 25);
+            this.button1.Size = new System.Drawing.Size(140, 31);
             this.button1.TabIndex = 12;
             this.button1.Text = "Save Group";
             this.button1.UseVisualStyleBackColor = true;
@@ -182,10 +170,9 @@
             // 
             // exportBtn
             // 
-            this.exportBtn.Location = new System.Drawing.Point(9, 210);
-            this.exportBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.exportBtn.Location = new System.Drawing.Point(12, 258);
             this.exportBtn.Name = "exportBtn";
-            this.exportBtn.Size = new System.Drawing.Size(56, 19);
+            this.exportBtn.Size = new System.Drawing.Size(75, 23);
             this.exportBtn.TabIndex = 13;
             this.exportBtn.Text = "Export";
             this.exportBtn.UseVisualStyleBackColor = true;
@@ -194,10 +181,9 @@
             // moveCheckBox
             // 
             this.moveCheckBox.AutoSize = true;
-            this.moveCheckBox.Location = new System.Drawing.Point(10, 102);
-            this.moveCheckBox.Margin = new System.Windows.Forms.Padding(2);
+            this.moveCheckBox.Location = new System.Drawing.Point(14, 125);
             this.moveCheckBox.Name = "moveCheckBox";
-            this.moveCheckBox.Size = new System.Drawing.Size(53, 17);
+            this.moveCheckBox.Size = new System.Drawing.Size(64, 21);
             this.moveCheckBox.TabIndex = 14;
             this.moveCheckBox.Text = "Move";
             this.moveCheckBox.UseVisualStyleBackColor = true;
@@ -205,28 +191,28 @@
             // compositeBox
             // 
             this.compositeBox.FormattingEnabled = true;
-            this.compositeBox.Location = new System.Drawing.Point(859, 10);
-            this.compositeBox.Margin = new System.Windows.Forms.Padding(2);
+            this.compositeBox.ItemHeight = 16;
+            this.compositeBox.Location = new System.Drawing.Point(1145, 12);
             this.compositeBox.Name = "compositeBox";
-            this.compositeBox.Size = new System.Drawing.Size(393, 69);
+            this.compositeBox.Size = new System.Drawing.Size(523, 84);
             this.compositeBox.TabIndex = 15;
             // 
-            // ornamentBtn
+            // button2
             // 
-            this.ornamentBtn.Location = new System.Drawing.Point(398, 41);
-            this.ornamentBtn.Name = "ornamentBtn";
-            this.ornamentBtn.Size = new System.Drawing.Size(75, 23);
-            this.ornamentBtn.TabIndex = 16;
-            this.ornamentBtn.Text = "Ornament";
-            this.ornamentBtn.UseVisualStyleBackColor = true;
-            this.ornamentBtn.Click += new System.EventHandler(this.ornamentBtn_Click);
+            this.button2.Location = new System.Drawing.Point(530, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 31);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Add Ornament";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 448);
-            this.Controls.Add(this.ornamentBtn);
+            this.ClientSize = new System.Drawing.Size(1680, 552);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.compositeBox);
             this.Controls.Add(this.moveCheckBox);
             this.Controls.Add(this.exportBtn);
@@ -242,7 +228,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.drawRectangleBtn);
             this.Controls.Add(this.drawEllipseBtn);
-            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -269,7 +254,7 @@
         private System.Windows.Forms.Button exportBtn;
         private System.Windows.Forms.CheckBox moveCheckBox;
         private System.Windows.Forms.ListBox compositeBox;
-        private System.Windows.Forms.Button ornamentBtn;
+        private System.Windows.Forms.Button button2;
     }
 }
 

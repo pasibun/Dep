@@ -11,8 +11,8 @@ namespace DesignPatternsStep1
     abstract class DecoratorPattern : Shape
     {
         public Shape ornamentshape;
-        public Composite ornamentGroup;
         public string ornamentText;
+        public Composite ornamentGroup;
 
         public DecoratorPattern(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId,
             bool inGroup, List<Label> labels) : base(FormToDrawOn, shapeLocation, shapeSize, shapeId, inGroup, labels)
@@ -38,17 +38,18 @@ namespace DesignPatternsStep1
             Font stringfont = new Font("Microsoft Sans Serif", 8);
             Graphics g = Form1.ActiveForm.CreateGraphics();
             SizeF stringsSize = g.MeasureString(text, stringfont);
-            if (s == null)
-            {
-                stringsSize = g.MeasureString(text, stringfont);
-                ornamentLocation.X = c.Position.X - ((int)stringsSize.Width + 25);
-                ornamentLocation.Y = c.Position.Y + (c.Size.Height / 2);
-            }
-            else
+
+            if (c == null)
             {
                 ornamentLocation.X = s.X - ((int)stringsSize.Width + 25);
                 ornamentLocation.Y = s.Y + (s.Height / 2);
             }
+            else
+            {
+                ornamentLocation.X = c.Position.X - ((int)stringsSize.Width + 25);
+                ornamentLocation.Y = c.Position.Y + (c.Size.Height / 2);
+            }
+
         }
 
     }
@@ -61,15 +62,15 @@ namespace DesignPatternsStep1
 
         public RightOrnament(Shape s, Composite c, string text) : base(s, c, text)
         {
-            if (s == null)
-            {
-                ornamentLocation.X = c.Position.X + c.Size.Width + 10;
-                ornamentLocation.Y = c.Position.Y + (c.Size.Height / 2);
-            }
-            else
+            if (c == null)
             {
                 ornamentLocation.X = s.X + s.Width + 10;
                 ornamentLocation.Y = s.Y + (s.Height / 2);
+            }
+            else
+            {
+                ornamentLocation.X = c.Position.X + (c.Size.Width + 10);
+                ornamentLocation.Y = c.Position.Y + (c.Size.Height / 2);
             }
         }
     }
@@ -82,15 +83,15 @@ namespace DesignPatternsStep1
 
         public AboveOrnament(Shape s, Composite c, string text) : base(s, c, text)
         {
-            if (s == null)
-            {
-                ornamentLocation.Y = c.Position.Y - 15;
-                ornamentLocation.X = c.Position.X + (c.Size.Width / 2);
-            }
-            else
+            if (c == null)
             {
                 ornamentLocation.Y = s.Y - 15;
                 ornamentLocation.X = s.X + (s.Width / 2);
+            }
+            else
+            {
+                ornamentLocation.Y = c.Position.Y - 15;
+                ornamentLocation.X = c.Position.X + (c.Size.Width / 2);
             }
         }
     }
@@ -103,15 +104,15 @@ namespace DesignPatternsStep1
 
         public BelowOrnament(Shape s, Composite c, string text) : base(s, c, text)
         {
-            if (s == null)
-            {
-                ornamentLocation.Y = c.Position.Y + (c.Size.Height + 15);
-                ornamentLocation.X = c.Position.X + (c.Size.Width / 2);
-            }
-            else
+            if (c == null)
             {
                 ornamentLocation.Y = s.Y + (s.Height + 15);
                 ornamentLocation.X = s.X + (s.Width / 2);
+            }
+            else
+            {
+                ornamentLocation.Y = c.Position.Y + (c.Size.Height + 15);
+                ornamentLocation.X = c.Position.X + (c.Size.Width / 2);
             }
         }
     }

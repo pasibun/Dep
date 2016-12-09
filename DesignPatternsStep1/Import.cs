@@ -13,20 +13,19 @@ namespace DesignPatternsStep1
     class FileIO
     {        
         private List<Composite> compList = new List<Composite>();
-        private List<string> wordParts = new List<string>();
-        private List<string> lines;
 
         private Point location;
         private Size size;
+
+        private List<string> wordParts = new List<string>();
+        private List<string> lines;
+
         private Pen redPen;
-
-        private Form1 form = Application.OpenForms.Cast<Form>().Last() as Form1;
-
+        private Form1 form = Form1.Instance;
         private Composite comp;
         private Leaf leaf;
 
-        #region import  
-        //Read text file and add it to a list     
+        #region import       
         public List<Composite> importFile(string importFile) {
             lines = File.ReadAllLines(importFile).ToList();
             compList.Clear();
@@ -34,8 +33,6 @@ namespace DesignPatternsStep1
             return tempComp;
         }
 
-        //recurcive functionm, import file. checks the tabs in the line and checks the first word.
-        // Also create groups and add the right shapes and groups to the right group.
         private List<Composite> recursiveImport(int stopCount)
         {
             if (lines.Count.Equals(stopCount))
@@ -45,9 +42,11 @@ namespace DesignPatternsStep1
             else
             {
                 redPen = new Pen(Color.Red);
+                //de line opdelen in verschillende woorden door het op te splitsen.
                 wordParts = lines[stopCount].Split(' ').ToList();
                 int countTabs = DetermineTabs(wordParts);
                 RemoveTabs(wordParts, 0);
+                //eerste woord van line controleren
                 switch (wordParts.First())
                 {
                     case "group":
@@ -123,7 +122,7 @@ namespace DesignPatternsStep1
             Form1.drawRectangle = false;
             return form.DrawShape(location.X, location.Y, size);
         }
-                
+
         private int DetermineTabs(List<string> checkSpaces) {
             int countTabs = 0;
             for (int i = 0; i < checkSpaces.Count; i++)
@@ -136,7 +135,6 @@ namespace DesignPatternsStep1
             return countTabs;
         }
 
-        //Recursive funtion, remove tabs after determine tabs.
         private bool RemoveTabs(List<string> removespaces, int index) {
             if (removespaces.Count.Equals(index))
             {

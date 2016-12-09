@@ -21,7 +21,7 @@ namespace DesignPatternsStep1
     {
         public Shape shape;
 
-        Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
+        Form1 lastOpenedForm = Form1.Instance;
 
         public Leaf(Shape shape)
         {
@@ -65,18 +65,22 @@ namespace DesignPatternsStep1
         {
             shape.X = shape.X + deltaX - 25;
             shape.Y = shape.Y + deltaY - 25;
-
-            if(shape is RectangleShape)
+            
+            if (shape is RectangleShape)
                 shape = new RectangleShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
             else
                 shape = new EllipseShape(lastOpenedForm, new Point(shape.X, shape.Y), new Size(shape.Width, shape.Height), shape.ShapeId, shape.InGroup, shape.OrnamentList);
 
             lastOpenedForm.Refresh();
+
+           // shape.MoveOrnaments(deltaX - 25, deltaY - 25, 0, 0, true);
+            
             for (int i = 0; i < Form1.drawnShapes.Count; ++i)
             {
                 if (Form1.drawnShapes[i].ShapeId == shape.ShapeId)
+                {
                     Form1.drawnShapes[i] = shape;
-
+                }
                 Form1.drawnShapes[i].DrawShape(Form1.drawnShapes[i].X, Form1.drawnShapes[i].Y, Form1.drawnShapes[i].Width, Form1.drawnShapes[i].Height, new Pen(Color.Red));
             }
         }
@@ -92,6 +96,7 @@ namespace DesignPatternsStep1
         public int compositeIndex = 0;
 
         public List<CompositePattern> subordinates = new List<CompositePattern>();
+        public List<Label> groupOrnaments = new List<Label>();
 
         public Composite(String name, Point position, Size size)
         {
@@ -100,10 +105,10 @@ namespace DesignPatternsStep1
             this.size = size;
         }
 
-        public bool GroupInGroup
+        public Point Position
         {
-            get { return groepInGroup; }
-            set { groepInGroup = value; }
+            get { return position; }
+            set { position = value; }
         }
 
         public Size Size
@@ -112,10 +117,27 @@ namespace DesignPatternsStep1
             set { size = value; }
         }
 
-        public Point Position
+        public int X
         {
-            get { return position; }
-            set { position = value; }
+            get { return position.X; }
+        }
+        public int Y
+        {
+            get { return position.Y; }
+        }
+        public int Width
+        {
+            get { return size.Width; }
+        }
+        public int Height
+        {
+            get { return size.Height; }
+        }
+
+        public bool GroupInGroup
+        {
+            get { return groepInGroup; }
+            set { groepInGroup = value; }
         }
 
         public override void resizeGroup(int newWidth, int newHeight)

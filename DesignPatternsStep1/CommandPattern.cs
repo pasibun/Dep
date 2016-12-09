@@ -17,15 +17,14 @@ namespace DesignPatternsStep1
 
     class DrawCommand : CommandPattern
     {
-        Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
+        Form1 lastOpenedForm = Form1.Instance;
         Shape shape;
         protected Point position;
         protected int width;
         protected int height;
         // Constructor
-        public DrawCommand(Shape shape, int x, int y, int width, int height, Form1 form)
+        public DrawCommand(Shape shape, int x, int y, int width, int height)
         {
-            this.lastOpenedForm = form;
             this.shape = shape;
             this.position = new Point(x, y);
             this.width = width;
@@ -60,12 +59,11 @@ namespace DesignPatternsStep1
     {
         private int changeOfWidth;
         private int changeOfHeight;
-        Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
+        Form1 lastOpenedForm = Form1.Instance;
         Shape shape;
 
-        public ResizeCommand(Shape shape, int newWidth, int newHeight, Form1 form)
+        public ResizeCommand(Shape shape, int newWidth, int newHeight)
         {
-            this.lastOpenedForm = form;
             this.shape = shape;
             this.changeOfWidth = newWidth;
             this.changeOfHeight = newHeight;
@@ -104,15 +102,14 @@ namespace DesignPatternsStep1
 
     class MoveCommand : CommandPattern
     {
-        Form1 lastOpenedForm = Application.OpenForms.Cast<Form>().Last() as Form1;
+        Form1 lastOpenedForm = Form1.Instance;
         private Shape shape;
         private int changeOfLocationX;
         private int changeOfLocationY;
 
-        public MoveCommand(Shape shape, int newX, int newY, Form1 form)
+        public MoveCommand(Shape shape, int newX, int newY)
         {
             this.shape = shape;
-            this.lastOpenedForm = form;
             this.changeOfLocationX = newX;
             this.changeOfLocationY = newY;
         }

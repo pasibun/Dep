@@ -10,15 +10,15 @@ namespace DesignPatternsStep1
 {
     class EllipseShape : Shape
     {
-        public EllipseShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup, List<Label> labels) : base(FormToDrawOn, Location, Size, shapeId, inGroup, labels)
+        public EllipseShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup, List<Label> ornaments) : base(FormToDrawOn, Location, Size, shapeId, inGroup, ornaments)
         { }
 
         public override void DrawShape(int x, int y, int Width, int Height, Pen pen)
         {
             formGraphics = m_frmRef.CreateGraphics();
 
-            base.DrawShape(x, y, Width, Height, pen);
-
+            base.DrawShape(x,y, Width, Height, pen);
+            
             formGraphics.DrawEllipse(formPen, shape);
             formPen.Dispose();
             formGraphics.Dispose();

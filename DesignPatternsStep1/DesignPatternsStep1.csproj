@@ -22,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,11 +57,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="OrnamentForm.cs">
+    <Compile Include="OrnamentPopup.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="OrnamentForm.Designer.cs">
-      <DependentUpon>OrnamentForm.cs</DependentUpon>
+    <Compile Include="OrnamentPopup.Designer.cs">
+      <DependentUpon>OrnamentPopup.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +71,8 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OrnamentForm.resx">
-      <DependentUpon>OrnamentForm.cs</DependentUpon>
+    <EmbeddedResource Include="OrnamentPopup.resx">
+      <DependentUpon>OrnamentPopup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

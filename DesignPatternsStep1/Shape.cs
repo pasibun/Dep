@@ -8,7 +8,7 @@ namespace DesignPatternsStep1
     {
         protected Control m_frmRef;
         protected Point location;
-        protected Size size;       
+        protected Size size;
 
         protected Rectangle shape;
         protected Graphics formGraphics;
@@ -20,14 +20,44 @@ namespace DesignPatternsStep1
         protected bool drawn = false;
         protected bool inGroup = false;
 
+        protected string myDecoration;
+        protected Point decorationPos;
+
         protected Point ornamentLocation;
         protected string ornamentText;
-        protected List<Label> ornamentListLabel = new List<Label>();
+        protected List<Label> ornamentList = new List<Label>();
 
         private Shape s;
         private Composite c;
         private string text;
 
+        public int ShapeId
+        {
+            get {return shapeId; }
+            set { shapeId = value; }
+        }
+
+        public bool InGroup
+        {
+            get { return inGroup; }
+            set { inGroup = value; }
+        }
+
+        public List<Label> OrnamentList
+        {
+            get { return ornamentList; }
+            set { ornamentList = value; }
+        }
+        public string OrnamentText
+        {
+            get { return ornamentText; }
+            set { ornamentText = value; }
+        }
+        public Point OrnamentLocation
+        {
+            get { return ornamentLocation; }
+            set { ornamentLocation = value; }
+        }
         public Shape(Shape s, Composite c, string text)
         {
             this.s = s;
@@ -35,14 +65,22 @@ namespace DesignPatternsStep1
             this.ornamentText = text;
         }
 
-        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> labels) 
+        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> ornaments) 
         {
             m_frmRef = FormToDrawOn;
             location = shapeLocation;
             size = shapeSize;
             ShapeId = shapeId;
             InGroup = inGroup;
-            this.ornamentListLabel = labels;
+            OrnamentList = ornaments;
+        }
+
+        //constructor for ornaments.
+        public Shape(string text, int offsetX, int offsetY, Shape shape)
+        {
+            this.myDecoration = text;
+            this.decorationPos.X = offsetX;
+            this.decorationPos.Y = offsetY;
         }
 
         public void Accept(VisitorPattern v)
@@ -56,59 +94,30 @@ namespace DesignPatternsStep1
             formPen = new Pen(pen.Color);
         }
 
-        public List<Label> OrnamentList
-        {
-            get { return ornamentListLabel; }
-            set { ornamentListLabel = value; }
-        }
-
-        public string OrnamentText
-        {
-            get { return ornamentText; }
-            set { ornamentText = value; }
-        }
-
-        public Point OrnamentLocation
-        {
-            get { return ornamentLocation; }
-            set { ornamentLocation = value; }
-        }
-
         public bool Contains(int x, int y)
         {
             return shape.Contains(x,y);
         }
 
-        public int ShapeId
+        /*public void MoveOrnaments(int x, int y, int oldWidth, int oldHeight, bool moving)
         {
-            get { return shapeId; }
-            set { shapeId = value; }
-        }
-
-        public bool InGroup
-        {
-            get { return inGroup; }
-            set { inGroup = value; }
-        }
-
-        public bool alreadyDrawn
-        {
-            get { return drawn; }
-            set { drawn = value; }
-        }
-
-        public bool Moved
-        {
-            get { return moved; }
-            set { moved = value; }
-        }
-
-        public bool Resized
-        {
-            get { return resized; }
-            set { resized = value; }
-        }
-
+            for (int i = 0; i < ornamentList.Count; ++i)
+            {
+                if (!moving)
+                {
+                    if (ornamentList[i].Location.X > (shape.X + oldWidth) || ornamentList[i].Location.Y > (shape.Y + oldHeight))
+                    {
+                        ornamentList[i].Left += x;
+                        ornamentList[i].Top += y;
+                    }
+                }
+                else
+                {
+                    ornamentList[i].Left += x;
+                    ornamentList[i].Top += y;
+                }
+            }
+        }     */
         public int X
         {
             get { return location.X; }
