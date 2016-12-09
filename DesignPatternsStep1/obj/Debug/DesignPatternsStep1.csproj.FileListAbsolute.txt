@@ -3,7 +3,6 @@ C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPattern
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\bin\Debug\DesignPatternsStep1.pdb
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csprojResolveAssemblyReference.cache
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Form1.resources
-C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.OrnamentForm.resources
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.Properties.Resources.resources
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
 C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
@@ -18,3 +17,4 @@ C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\D
 C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.csproj.GenerateResource.Cache
 C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.exe
 C:\Users\jylti\Documents\School\Design Patterns\DEPGIT\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.pdb
+C:\Users\LaptopPasibun\Documents\Dep\DesignPatternsStep1\obj\Debug\DesignPatternsStep1.OrnamentPopup.resources

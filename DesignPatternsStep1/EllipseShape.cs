@@ -10,7 +10,8 @@ namespace DesignPatternsStep1
 {
     class EllipseShape : Shape
     {
-        public EllipseShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup, List<Label> ornaments) : base(FormToDrawOn, Location, Size, shapeId, inGroup, ornaments)
+
+        public EllipseShape(Control FormToDrawOn, Point Location, Size Size, int shapeId, bool inGroup, List<Label> labels, int index) : base(FormToDrawOn, Location, Size, shapeId, inGroup, labels, index)
         { }
 
         public override void DrawShape(int x, int y, int Width, int Height, Pen pen)

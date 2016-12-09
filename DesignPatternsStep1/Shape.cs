@@ -25,15 +25,44 @@ namespace DesignPatternsStep1
 
         protected Point ornamentLocation;
         protected string ornamentText;
+
         protected List<Label> ornamentList = new List<Label>();
+
+        protected int shapeIndex = 0;
 
         private Shape s;
         private Composite c;
         private string text;
 
+        public Shape(Shape s, Composite c, string text)
+        {
+            this.s = s;
+            this.c = c;
+            this.ornamentText = text;
+        }
+
+        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> labels, int index) 
+        {
+            this.m_frmRef = FormToDrawOn;
+            this.location = shapeLocation;
+            this.size = shapeSize;
+            this.ShapeId = shapeId;
+            this.InGroup = inGroup;
+            this.OrnamentList = labels;
+            this.ShapeIndex = index;
+        }
+
+        //constructor for ornaments.
+        public Shape(string text, int offsetX, int offsetY, Shape shape)
+        {
+            this.myDecoration = text;
+            this.decorationPos.X = offsetX;
+            this.decorationPos.Y = offsetY;
+        }
+
         public int ShapeId
         {
-            get {return shapeId; }
+            get { return shapeId; }
             set { shapeId = value; }
         }
 
@@ -48,6 +77,13 @@ namespace DesignPatternsStep1
             get { return ornamentList; }
             set { ornamentList = value; }
         }
+
+        public int ShapeIndex
+        {
+            get { return shapeIndex; }
+            set { shapeIndex = value; }
+        }
+
         public string OrnamentText
         {
             get { return ornamentText; }
@@ -57,30 +93,6 @@ namespace DesignPatternsStep1
         {
             get { return ornamentLocation; }
             set { ornamentLocation = value; }
-        }
-        public Shape(Shape s, Composite c, string text)
-        {
-            this.s = s;
-            this.c = c;
-            this.ornamentText = text;
-        }
-
-        public Shape(Control FormToDrawOn, Point shapeLocation, Size shapeSize, int shapeId, bool inGroup, List<Label> ornaments) 
-        {
-            m_frmRef = FormToDrawOn;
-            location = shapeLocation;
-            size = shapeSize;
-            ShapeId = shapeId;
-            InGroup = inGroup;
-            OrnamentList = ornaments;
-        }
-
-        //constructor for ornaments.
-        public Shape(string text, int offsetX, int offsetY, Shape shape)
-        {
-            this.myDecoration = text;
-            this.decorationPos.X = offsetX;
-            this.decorationPos.Y = offsetY;
         }
 
         public void Accept(VisitorPattern v)
@@ -99,25 +111,6 @@ namespace DesignPatternsStep1
             return shape.Contains(x,y);
         }
 
-        /*public void MoveOrnaments(int x, int y, int oldWidth, int oldHeight, bool moving)
-        {
-            for (int i = 0; i < ornamentList.Count; ++i)
-            {
-                if (!moving)
-                {
-                    if (ornamentList[i].Location.X > (shape.X + oldWidth) || ornamentList[i].Location.Y > (shape.Y + oldHeight))
-                    {
-                        ornamentList[i].Left += x;
-                        ornamentList[i].Top += y;
-                    }
-                }
-                else
-                {
-                    ornamentList[i].Left += x;
-                    ornamentList[i].Top += y;
-                }
-            }
-        }     */
         public int X
         {
             get { return location.X; }

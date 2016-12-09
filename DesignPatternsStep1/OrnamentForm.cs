@@ -45,28 +45,28 @@ namespace DesignPatternsStep1
                     {
                         AboveOrnament aOrnament = new AboveOrnament(s, c,
                             OrnamentTextBox.Text.ToString());
-                        CreateLabel(aOrnament, "Above");
+                        CreateLabel(aOrnament, "top");
                         break;
                     }
                 case "Below":
                     {
                         BelowOrnament bOrnament = new BelowOrnament(s, c,
                             OrnamentTextBox.Text.ToString());
-                        CreateLabel(bOrnament, "Below");
+                        CreateLabel(bOrnament, "bottom");
                         break;
                     }
                 case "Left":
                     {
                         LeftOrnament lOrnament = new LeftOrnament(s, c,
                             OrnamentTextBox.Text.ToString());
-                        CreateLabel(lOrnament, "Left");
+                        CreateLabel(lOrnament, "left");
                         break;
                     }
                 case "Right":
                     {
                         RightOrnament rOrnament = new RightOrnament(s, c,
                             OrnamentTextBox.Text.ToString());
-                        CreateLabel(rOrnament, "Right");
+                        CreateLabel(rOrnament, "right");
                         break;
                     }
             }
@@ -82,8 +82,26 @@ namespace DesignPatternsStep1
             OrnamentLabel.AutoSize = true;
 
             form.Controls.Add(OrnamentLabel);
-            //currentShape.OrnamentList.Add(OrnamentLabel);
-            //form.Refresh();
+            if (currentShape != null)
+            {
+                currentShape.OrnamentList.Add(OrnamentLabel);
+                foreach (Composite c in Form1.composites)
+                {
+                    for (int i = 0; i < c.subordinates.Count; i++)
+                    {
+                        if (c.subordinates[i].GetShape().ShapeId.Equals(currentShape.ShapeId))
+                        {
+                            c.compositeSize++;
+                        }
+                    }
+                    
+                }
+            }
+            else
+            {
+                currentGroup.groupOrnaments.Add(OrnamentLabel);
+                currentGroup.compositeSize++;
+            }
             this.Close();
         }
     }
