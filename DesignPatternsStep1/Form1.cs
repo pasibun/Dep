@@ -61,9 +61,7 @@ namespace DesignPatternsStep1
             InitializeComponent();
             redPen = new Pen(Color.Red);
             bluePen = new Pen(Color.Blue);
-
         }
-
         private static Form1 instance = null;
         public static Form1 Instance
         {
@@ -76,7 +74,6 @@ namespace DesignPatternsStep1
                 return instance;
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             rec = new Receiver();
@@ -139,15 +136,10 @@ namespace DesignPatternsStep1
 
                 if (!s.InGroup)
                 {
-                    moveOrnement(s, composites[compositeBox.SelectedIndex]);
+                    moveOrnement(s, null);
                 }
-                else if (compositeBox.SelectedIndex != -1)
-                {
-                    s = null;
-                    MoveOrnamentsInGroup(s, composites[compositeBox.SelectedIndex]);
-                }
-                else if (s.InGroup)
-                    MoveOrnamentsInGroup(s, composites[compositeBox.SelectedIndex]);
+                else
+                    MoveOrnamentsInGroup(s);
             }
         }
         private void moveOrnementGroup(Shape s)
@@ -612,14 +604,16 @@ namespace DesignPatternsStep1
                 minXY = new Point(0, 0);
                 maxXY = new Point(0, 0);
                 //check ff GROUPORNAMENTS
-                Move(c.GroupOrnaments, s, c);
+                Move(c.GroupOrnaments, null, c);
+            }
+            else if(s != null)
+            {
+                Move(s.OrnamentList, s, null);
             }
         }
 
-        public void MoveOrnamentsInGroup(Shape s, Composite comp)
+        public void MoveOrnamentsInGroup(Shape s)
         {
-            if (s != null)
-            {
                 foreach (Composite c in composites)
                 {
                     for (int j = 0; j < c.subordinates.Count; j++)
@@ -630,9 +624,7 @@ namespace DesignPatternsStep1
                         }
                     }
                 }
-            }
-            else
-                recursiveOrnament(comp, 0, 0);
+            
         }
 
         private bool recursiveOrnament(Composite c, int stop, int groupInGroup)
