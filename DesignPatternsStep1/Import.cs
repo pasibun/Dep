@@ -61,7 +61,8 @@ namespace DesignPatternsStep1
                                 {
                                     List<string> cache = new List<string>();
                                     cache = a.Split(' ').ToList();
-                                    string ornamentLocatie = wordParts[1];
+                                    RemoveTabs(cache, 0);
+                                    string ornamentLocatie = cache[1];
                                     cache[2].Replace(@"\", "");
                                     string ornamentText = cache[2];
                                     createOrnament(null, comp, ornamentLocatie, ornamentText);
@@ -98,7 +99,14 @@ namespace DesignPatternsStep1
                                 leaf = new Leaf(s);
                                 s.InGroup = true;
                                 comp.subordinates.Add(leaf);
-                                Form1.determineGroupSize(comp, 0, 0);
+                                Form1.Instance.maxWidth = 0;
+                                Form1.Instance.maxHeight = 0;
+                                Form1.Instance.groupSizeX.Clear();
+                                Form1.Instance.groupSizeY.Clear();
+                                Form1.Instance.determineGroupSize(comp, 0, 0);
+                                comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
+                                comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
+                                                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
                             }
                             else
                             {
@@ -117,11 +125,19 @@ namespace DesignPatternsStep1
                             size = new Size(int.Parse(wordParts[3]), int.Parse(wordParts[4]));
                             if (!countTabs.Equals(0))
                             {
+                                
                                 s = createEllipse(location, size);
                                 leaf = new Leaf(s);
                                 s.InGroup = true;
                                 comp.subordinates.Add(leaf);
-                                Form1.determineGroupSize(comp, 0, 0);
+                                Form1.Instance.maxWidth = 0;
+                                Form1.Instance.maxHeight = 0;
+                                Form1.Instance.groupSizeX.Clear();
+                                Form1.Instance.groupSizeY.Clear();
+                                Form1.Instance.determineGroupSize(comp, 0, 0);
+                                comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
+                                comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
+                                                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
                             }
                             else
                             {
@@ -165,28 +181,28 @@ namespace DesignPatternsStep1
         {
             switch (location)
             {
-                case "top":
+                case "Above":
                     {
-                        AboveOrnament aOrnament = new AboveOrnament(s, c, text);                        
-                        CreateLabel(aOrnament, "Above", text, s, c);
+                        AboveOrnament aOrnament = new AboveOrnament(s, c, text);
+                        CreateLabel(aOrnament, location, text, s, c);
                         break;
                     }
-                case "bottom":
+                case "Below":
                     {
                         BelowOrnament bOrnament = new BelowOrnament(s, c, text);
-                        CreateLabel(bOrnament, "Below", text, s, c);
+                        CreateLabel(bOrnament, location, text, s, c);
                         break;
                     }
-                case "left":
+                case "Left":
                     {
                         LeftOrnament lOrnament = new LeftOrnament(s, c, text);
-                        CreateLabel(lOrnament, "Left", text, s, c);
+                        CreateLabel(lOrnament, location, text, s, c);
                         break;
                     }
-                case "right":
+                case "Right":
                     {
                         RightOrnament rOrnament = new RightOrnament(s, c, text);
-                        CreateLabel(rOrnament, "Right", text, s, c);
+                        CreateLabel(rOrnament, location, text, s, c);
                         break;
                     }
             }
@@ -204,7 +220,13 @@ namespace DesignPatternsStep1
             form.Controls.Add(OrnamentLabel);
             if (c == null)
                 s.OrnamentList.Add(OrnamentLabel);
-            //else c.OrnamentList.Add(OrnamentLabel);
+            else
+            {
+                c.GroupOrnaments.Add(OrnamentLabel);
+                Form1.Instance.determineGroupSize(c, 0, 0);
+                Form1.Instance.recursiveOrnament(c, 0, 0);
+            }
+            form.Refresh();
         }
 
         private Shape createRectangle(Point location, Size size)

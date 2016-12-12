@@ -52,12 +52,12 @@ namespace DesignPatternsStep1
 
             lastOpenedForm.Refresh();
 
-            for (int i = 0; i < Form1.drawnShapes.Count; ++i)
+            for (int i = 0; i < Form1.Instance.drawnShapes.Count; ++i)
             {
-                if (Form1.drawnShapes[i].ShapeId == shape.ShapeId)
-                    Form1.drawnShapes[i] = shape;
+                if (Form1.Instance.drawnShapes[i].ShapeId == shape.ShapeId)
+                    Form1.Instance.drawnShapes[i] = shape;
 
-                Form1.drawnShapes[i].DrawShape(Form1.drawnShapes[i].X, Form1.drawnShapes[i].Y, Form1.drawnShapes[i].Width, Form1.drawnShapes[i].Height, new Pen(Color.Red));
+                Form1.Instance.drawnShapes[i].DrawShape(Form1.Instance.drawnShapes[i].X, Form1.Instance.drawnShapes[i].Y, Form1.Instance.drawnShapes[i].Width, Form1.Instance.drawnShapes[i].Height, new Pen(Color.Red));
             }
         }
 
@@ -74,13 +74,13 @@ namespace DesignPatternsStep1
 
             // shape.MoveOrnaments(deltaX - 25, deltaY - 25, 0, 0, true);
 
-            for (int i = 0; i < Form1.drawnShapes.Count; ++i)
+            for (int i = 0; i < Form1.Instance.drawnShapes.Count; ++i)
             {
-                if (Form1.drawnShapes[i].ShapeId == shape.ShapeId)
+                if (Form1.Instance.drawnShapes[i].ShapeId == shape.ShapeId)
                 {
-                    Form1.drawnShapes[i] = shape;
+                    Form1.Instance.drawnShapes[i] = shape;
                 }
-                Form1.drawnShapes[i].DrawShape(Form1.drawnShapes[i].X, Form1.drawnShapes[i].Y, Form1.drawnShapes[i].Width, Form1.drawnShapes[i].Height, new Pen(Color.Red));
+                Form1.Instance.drawnShapes[i].DrawShape(Form1.Instance.drawnShapes[i].X, Form1.Instance.drawnShapes[i].Y, Form1.Instance.drawnShapes[i].Width, Form1.Instance.drawnShapes[i].Height, new Pen(Color.Red));
             }
         }
     }

@@ -8,10 +8,10 @@ namespace DesignPatternsStep1
 {
     public partial class Form1 : Form
     {
-        public static List<Shape> drawnShapes = new List<Shape>();
-        public static List<Shape> shapeCache = new List<Shape>();
-        public static List<string> exportList = new List<string>();
-        public static List<Composite> compList = new List<Composite>();
+        public List<Shape> drawnShapes = new List<Shape>();
+        public List<Shape> shapeCache = new List<Shape>();
+        public List<string> exportList = new List<string>();
+        public List<Composite> compList = new List<Composite>();
 
 
         public int selectedShape = -1;
@@ -33,8 +33,8 @@ namespace DesignPatternsStep1
         Pen redPen;
         Pen bluePen;
 
-        public static Stack<Shape> undo = new Stack<Shape>();
-        public static Stack<Shape> redo = new Stack<Shape>();
+        public Stack<Shape> undo = new Stack<Shape>();
+        public Stack<Shape> redo = new Stack<Shape>();
         Receiver rec;
 
         int oldWidth;
@@ -48,7 +48,7 @@ namespace DesignPatternsStep1
         private int oldLocationX;
         private int oldLocationY;
 
-        public static List<Composite> composites = new List<Composite>();
+        public List<Composite> composites = new List<Composite>();
 
         Composite comp;
         Leaf leaf;
@@ -126,6 +126,7 @@ namespace DesignPatternsStep1
         {
             DrawShape(e.X, e.Y, new Size(50, 50));
         }
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             mouseDown = false;
@@ -142,10 +143,13 @@ namespace DesignPatternsStep1
                     MoveOrnamentsInGroup(s);
             }
         }
+
         private void moveOrnementGroup(Shape s)
         {
+
             foreach (Composite c in composites)
             {
+                compList.Clear();
                 for (int j = 0; j < c.subordinates.Count; j++)
                 {
                     if (c.subordinates[j].GetShapeId().Equals(s.ShapeId))
@@ -156,111 +160,40 @@ namespace DesignPatternsStep1
             }
         }
 
-        public static Point minXY;
-        public static Point maxXY;
-        public static bool determineGroupSize(Composite comp, int stop, int groupInGroup)
+        public List<int> groupSizeX = new List<int>();
+        public List<int> groupSizeY = new List<int>();
+        public int maxWidth;
+        public int maxHeight;
+        public bool compListCheck = false;
+        public bool determineGroupSize(Composite c, int stop, int groupInGroup)
         {
-            if (stop.Equals(comp.subordinates.Count))
+            if (stop.Equals(c.subordinates.Count))
             {
                 if (groupInGroup.Equals(0))
-                {
                     return true;
-                }
                 else
-                {
-                    return determineGroupSize(compList[groupInGroup - 1], stop, groupInGroup - 1);
-                }
+                    return determineGroupSize(compList[groupInGroup - 1], 0, groupInGroup - 1);
             }
-            else if (comp.subordinates[stop].GetShape() is RectangleShape || comp.subordinates[stop].GetShape() is EllipseShape)
+            else if (c.subordinates[stop].GetShape() is RectangleShape || c.subordinates[stop].GetShape() is EllipseShape)
             {
-                if (!comp.subordinates.Count.Equals(stop + 1) && !(comp.subordinates[stop + 1] is Composite))
-                {
-                    Point location1 = new Point(comp.subordinates[stop].GetShape().X, comp.subordinates[stop].GetShape().Y);
-                    Point location2 = new Point(comp.subordinates[stop + 1].GetShape().X, comp.subordinates[stop + 1].GetShape().Y);
+                if (groupSizeX.Count > 0 && c.subordinates[stop].GetShape().X > groupSizeX.Max())
+                    maxWidth = c.subordinates[stop].GetShape().Width;
+                if (groupSizeY.Count > 0 && c.subordinates[stop].GetShape().Y > groupSizeY.Max())
+                    maxHeight = c.subordinates[stop].GetShape().Height;
 
-                    if (location1.X > location2.X)
-                    {
-                        if (location1.X > maxXY.X)
-                            maxXY.X = location1.X + comp.subordinates[stop].GetShape().Width;
-                        if (location2.X < minXY.X && minXY.X > 0)
-                            minXY.X = location2.X;
-                        else if (minXY.X == 0)
-                            minXY.X = location2.X;
-
-                        if (location1.Y > location2.Y)
-                        {
-                            if (location1.Y > maxXY.Y)
-                                maxXY.Y = location1.Y + comp.subordinates[stop].GetShape().Height;
-                            if (location2.Y < minXY.Y && minXY.Y > 0)
-                                minXY.Y = location2.Y;
-                            else if (minXY.Y == 0)
-                                minXY.Y = location2.Y;
-                        }
-                        else if (location1.Y < location2.Y)
-                        {
-                            if (location2.Y > maxXY.Y)
-                                maxXY.Y = location2.Y + comp.subordinates[stop].GetShape().Height;
-                            if (location1.Y < minXY.Y && minXY.Y > 0)
-                                minXY.Y = location1.Y;
-                            else if (minXY.Y == 0)
-                                minXY.Y = location1.Y;
-                        }
-                        return determineGroupSize(comp, stop + 1, groupInGroup);
-                    }
-                    else if (location1.X < location2.X)
-                    {
-                        if (location1.X < minXY.X && minXY.X > 0)
-                            minXY.X = location1.X;
-                        else if (minXY.Y == 0)
-                            minXY.X = location1.X;
-
-                        if (location2.X > maxXY.X)
-                            maxXY.X = location2.X + comp.subordinates[stop].GetShape().Width;
-
-                        if (location1.Y < location2.Y)
-                        {
-                            if (location1.Y < minXY.Y && minXY.Y > 0)
-                                minXY.Y = location1.Y;
-                            else if (minXY.Y == 0)
-                                minXY.Y = location1.Y;
-
-                            if (location2.Y > maxXY.Y)
-                                maxXY.Y = location2.Y + comp.subordinates[stop].GetShape().Height;
-                        }
-                        else if (location1.Y > location2.Y)
-                        {
-                            if (location2.Y < minXY.Y && minXY.Y > 0)
-                                minXY.Y = location2.Y;
-                            else if (minXY.Y == 0)
-                                minXY.Y = location2.Y;
-
-                            if (location1.Y > maxXY.Y)
-                                maxXY.Y = location1.Y + comp.subordinates[stop].GetShape().Height;
-                        }
-                        return determineGroupSize(comp, stop + 1, groupInGroup);
-                    }
-                    return determineGroupSize(comp, stop + 1, groupInGroup);
-                }
-                else
-                {
-                    if (comp.subordinates[stop].GetShape().X > maxXY.X)
-                        maxXY.X = comp.subordinates[stop].GetShape().X + comp.subordinates[stop].GetShape().Width;
-                    else if (comp.subordinates[stop].GetShape().X < minXY.X)
-                        minXY.X = comp.subordinates[stop].GetShape().X;
-                    if (comp.subordinates[stop].GetShape().Y > maxXY.Y)
-                        maxXY.Y = comp.subordinates[stop].GetShape().Y + comp.subordinates[stop].GetShape().Height;
-                    else if (comp.subordinates[stop].GetShape().Y < minXY.Y)
-                        minXY.Y = comp.subordinates[stop].GetShape().Y;
-                    return determineGroupSize(comp, stop + 1, groupInGroup);
-                }
+                groupSizeX.Add(c.subordinates[stop].GetShape().X);
+                groupSizeY.Add(c.subordinates[stop].GetShape().Y);
+                return determineGroupSize(c, stop + 1, groupInGroup);
             }
             else
             {
-                compList.Add(comp.subordinates[stop] as Composite);
-                return determineGroupSize(comp.subordinates[stop] as Composite, 0, groupInGroup + 1);
+                if (groupInGroup == 0)
+                    compList.Clear();
+                compList.Add(c.subordinates[stop] as Composite);
+                return determineGroupSize(c, stop + 1, groupInGroup + 1);
             }
         }
-        
+
         protected override void OnMouseDown(MouseEventArgs e)
         {
             mouseDown = true;
@@ -298,7 +231,7 @@ namespace DesignPatternsStep1
 
                     if (comp != null && !resize.Checked && !moveCheckBox.Checked && newGroup)
                     {
-                        leaf = new Leaf(drawnShapes[i]);                        
+                        leaf = new Leaf(drawnShapes[i]);
                         comp.AddSubordinate(leaf);
                         drawnShapes[i].InGroup = true;
                         if (drawnShapes[i].OrnamentList.Count != 0)
@@ -310,6 +243,7 @@ namespace DesignPatternsStep1
                 }
             }
         }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             Point[] pt = { new Point(e.X, e.Y) };
@@ -417,17 +351,18 @@ namespace DesignPatternsStep1
         //savegroup        
         private void button1_Click(object sender, EventArgs e)
         {
-            minXY = new Point(0, 0);
-            maxXY = new Point(0, 0);
-
             compList.Clear();
+            maxWidth = 0;
+            maxHeight = 0;
+            groupSizeX.Clear();
+            groupSizeY.Clear();
             newGroup = false;
             composites.Add(comp);
-
             determineGroupSize(comp, 0, 0);
 
-            comp.Position = minXY;
-            comp.Size = new Size(maxXY.X - minXY.X, maxXY.Y - minXY.Y);
+            comp.Position = new Point(groupSizeX.Min(), groupSizeY.Min());
+            comp.Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
+                                 (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
 
             if (compositeBox.SelectedIndex > -1)
             {
@@ -435,23 +370,19 @@ namespace DesignPatternsStep1
                 comp.compositeIndex = composites[compositeBox.SelectedIndex].compositeIndex + 1;
                 comp.groepInGroup = true;
 
-                determineGroupSize(composites[compositeBox.SelectedIndex], 0, 0);                
+                determineGroupSize(composites[compositeBox.SelectedIndex], 0, 0);
 
-                composites[compositeBox.SelectedIndex].Position = minXY;
-                composites[compositeBox.SelectedIndex].Size = new Size(maxXY.X - minXY.X, maxXY.Y - minXY.Y);
-                //for (int i = 0; i < comp.subordinates.Count; i++)
-                //{
-                //    comp.subordinates[i].GetShape().ShapeIndex = comp.compositeIndex;
-                //}
-            }          
+                composites[compositeBox.SelectedIndex].Position = new Point(groupSizeX.Min(), groupSizeY.Min());
+                composites[compositeBox.SelectedIndex].Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
+                                                                        (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
+            }
 
             compositeBox.Items.Clear();
             for (int i = 0; i < composites.Count; i++)
             {
                 compositeBox.Items.Add(composites[i].name + " " + composites[i].compositeSize);
             }
-
-            compositeBox.ClearSelected();  
+            compositeBox.ClearSelected();
         }
 
         private void exportBtn_Click(object sender, EventArgs e)
@@ -596,17 +527,18 @@ namespace DesignPatternsStep1
         {
             if (c != null)
             {
+                groupSizeX.Clear();
+                groupSizeY.Clear();
+                maxWidth = 0;
+                maxHeight = 0;
                 determineGroupSize(c, 0, 0);
+                c.Position = new Point(groupSizeX.Min(), groupSizeY.Min());
+                c.Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
+                                     (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
 
-                c.Position = minXY;
-                c.Size = new Size(maxXY.X - minXY.X, maxXY.Y - minXY.Y);
-
-                minXY = new Point(0, 0);
-                maxXY = new Point(0, 0);
-                //check ff GROUPORNAMENTS
-                Move(c.GroupOrnaments, null, c);
+                Move(c.groupOrnaments, null, c);
             }
-            else if(s != null)
+            else if (s != null)
             {
                 Move(s.OrnamentList, s, null);
             }
@@ -614,20 +546,20 @@ namespace DesignPatternsStep1
 
         public void MoveOrnamentsInGroup(Shape s)
         {
-                foreach (Composite c in composites)
+            foreach (Composite c in composites)
+            {
+                for (int j = 0; j < c.subordinates.Count; j++)
                 {
-                    for (int j = 0; j < c.subordinates.Count; j++)
+                    if (c.subordinates[j].GetShapeId().Equals(s.ShapeId))
                     {
-                        if (c.subordinates[j].GetShapeId().Equals(s.ShapeId))
-                        {
-                            recursiveOrnament(c, 0, 0);
-                        }
+                        recursiveOrnament(c, 0, 0);
                     }
                 }
-            
+            }
+
         }
 
-        private bool recursiveOrnament(Composite c, int stop, int groupInGroup)
+        public bool recursiveOrnament(Composite c, int stop, int groupInGroup)
         {
             if (stop.Equals(c.subordinates.Count))
             {
@@ -649,6 +581,8 @@ namespace DesignPatternsStep1
                 }
                 else
                 {
+                    if (groupInGroup == 0)
+                        compList.Clear();
                     compList.Add(c.subordinates[stop] as Composite);
                     return recursiveOrnament(c, stop + 1, groupInGroup + 1);
                 }
@@ -659,6 +593,18 @@ namespace DesignPatternsStep1
         {
             if (compositeBox.SelectedIndex > -1)
             {
+                for (int i = 0; i < composites.Count; i++)
+                {
+                    compList.Clear();
+                    groupSizeX.Clear();
+                    groupSizeY.Clear();
+                    maxWidth = 0;
+                    maxHeight = 0;
+                    determineGroupSize(composites[i], 0, 0);
+                    composites[i].Position = new Point(groupSizeX.Min(), groupSizeY.Min());
+                    composites[i].Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
+                                                (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
+                }
                 OrnamentPopup ornForm = new OrnamentPopup(null, composites[compositeBox.SelectedIndex]);
                 ornForm.Show();
             }
