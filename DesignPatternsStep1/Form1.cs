@@ -176,9 +176,9 @@ namespace DesignPatternsStep1
             }
             else if (c.subordinates[stop].GetShape() is RectangleShape || c.subordinates[stop].GetShape() is EllipseShape)
             {
-                if (groupSizeX.Count > 0 && c.subordinates[stop].GetShape().X > groupSizeX.Max())
+                if (groupSizeX.Count > 0 && c.subordinates[stop].GetShape().X >= groupSizeX.Max())
                     maxWidth = c.subordinates[stop].GetShape().Width;
-                if (groupSizeY.Count > 0 && c.subordinates[stop].GetShape().Y > groupSizeY.Max())
+                if (groupSizeY.Count > 0 && c.subordinates[stop].GetShape().Y >= groupSizeY.Max())
                     maxHeight = c.subordinates[stop].GetShape().Height;
 
                 groupSizeX.Add(c.subordinates[stop].GetShape().X);
