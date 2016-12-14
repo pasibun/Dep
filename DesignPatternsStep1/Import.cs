@@ -167,7 +167,7 @@ namespace DesignPatternsStep1
                         }
                 }
             }
-            return null;
+            return recursiveImport(stopCount);
         }
 
         private void checkIfShapeGetsOrnament(Shape s)
