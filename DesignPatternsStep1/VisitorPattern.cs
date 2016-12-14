@@ -191,6 +191,7 @@ namespace DesignPatternsStep1
             {
                 if (!c.groepInGroup)
                 {
+                    ornamentCheck(null, c);
                     exportList.Add(group + " " + c.subordinates.Count.ToString());
                     export(c, spaces, 0, 0);
                 }
