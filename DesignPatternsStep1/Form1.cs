@@ -12,6 +12,7 @@ namespace DesignPatternsStep1
         public List<Shape> shapeCache = new List<Shape>();
         public List<string> exportList = new List<string>();
         public List<Composite> compList = new List<Composite>();
+        public List<Composite> compList2 = new List<Composite>();
 
 
         public int selectedShape = -1;
@@ -26,6 +27,7 @@ namespace DesignPatternsStep1
         public static bool drawEllipse = false;
         public static bool drawRectangle = false;
 
+        private bool moreGroups = false;
         public bool resizedObject = false;
         public bool movedObject = false;
         public bool newGroup = false;
@@ -149,7 +151,6 @@ namespace DesignPatternsStep1
 
             foreach (Composite c in composites)
             {
-                compList.Clear();
                 for (int j = 0; j < c.subordinates.Count; j++)
                 {
                     if (c.subordinates[j].GetShapeId().Equals(s.ShapeId))
@@ -187,7 +188,7 @@ namespace DesignPatternsStep1
             }
             else
             {
-                if (groupInGroup == 0)
+                if (groupInGroup == 0 && !moreGroups)
                     compList.Clear();
                 compList.Add(c.subordinates[stop] as Composite);
                 return determineGroupSize(c, stop + 1, groupInGroup + 1);
@@ -366,6 +367,11 @@ namespace DesignPatternsStep1
 
             if (compositeBox.SelectedIndex > -1)
             {
+                for (int i = 0; i < composites[compositeBox.SelectedIndex].compositeSize; i++)
+                {
+                    if (composites[compositeBox.SelectedIndex].subordinates[i] is Composite)
+                        moreGroups = true;
+                }
                 composites[compositeBox.SelectedIndex].AddSubordinate(comp);
                 comp.compositeIndex = composites[compositeBox.SelectedIndex].compositeIndex + 1;
                 comp.groepInGroup = true;
@@ -535,7 +541,7 @@ namespace DesignPatternsStep1
                 c.Position = new Point(groupSizeX.Min(), groupSizeY.Min());
                 c.Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
                                      (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
-
+                
                 Move(c.groupOrnaments, null, c);
             }
             else if (s != null)
@@ -546,6 +552,7 @@ namespace DesignPatternsStep1
 
         public void MoveOrnamentsInGroup(Shape s)
         {
+            compList.Clear();
             foreach (Composite c in composites)
             {
                 for (int j = 0; j < c.subordinates.Count; j++)
@@ -569,7 +576,7 @@ namespace DesignPatternsStep1
                 }
                 else
                 {
-                    return recursiveOrnament(compList[groupInGroup - 1], 0, groupInGroup - 1);
+                    return recursiveOrnament(compList2[groupInGroup - 1], 0, groupInGroup - 1);
                 }
             }
             else
@@ -577,13 +584,13 @@ namespace DesignPatternsStep1
                 if (c.subordinates[stop].GetShape() is RectangleShape || c.subordinates[stop].GetShape() is EllipseShape)
                 {
                     moveOrnement(c.subordinates[stop].GetShape(), c);
-                    return recursiveOrnament(c, stop + 1, 0);
+                    return recursiveOrnament(c, stop + 1, groupInGroup);
                 }
                 else
                 {
-                    if (groupInGroup == 0)
-                        compList.Clear();
-                    compList.Add(c.subordinates[stop] as Composite);
+                    if (groupInGroup == 0 && !moreGroups)
+                        compList2.Clear();
+                    compList2.Add(c.subordinates[stop] as Composite);
                     return recursiveOrnament(c, stop + 1, groupInGroup + 1);
                 }
             }
