@@ -108,14 +108,14 @@ namespace DesignPatternsStep1
                                 leaf = new Leaf(s);
                                 s.InGroup = true;
                                 comp.subordinates.Add(leaf);
-                                Form1.Instance.maxWidth = 0;
-                                Form1.Instance.maxHeight = 0;
-                                Form1.Instance.groupSizeX.Clear();
-                                Form1.Instance.groupSizeY.Clear();
-                                Form1.Instance.determineGroupSize(comp, 0, 0);
-                                comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
-                                comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
-                                                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
+                                //Form1.Instance.maxWidth = 0;
+                                //Form1.Instance.maxHeight = 0;
+                                //Form1.Instance.groupSizeX.Clear();
+                                //Form1.Instance.groupSizeY.Clear();
+                                //Form1.Instance.determineGroupSize(comp, 0, 0);
+                                //comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
+                                //comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
+                                //                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
                             }
                             else
                             {
@@ -140,14 +140,14 @@ namespace DesignPatternsStep1
                                 leaf = new Leaf(s);
                                 s.InGroup = true;
                                 comp.subordinates.Add(leaf);
-                                Form1.Instance.maxWidth = 0;
-                                Form1.Instance.maxHeight = 0;
-                                Form1.Instance.groupSizeX.Clear();
-                                Form1.Instance.groupSizeY.Clear();
-                                Form1.Instance.determineGroupSize(comp, 0, 0);
-                                comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
-                                comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
-                                                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
+                                //Form1.Instance.maxWidth = 0;
+                                //Form1.Instance.maxHeight = 0;
+                                //Form1.Instance.groupSizeX.Clear();
+                                //Form1.Instance.groupSizeY.Clear();
+                                //Form1.Instance.determineGroupSize(comp, 0, 0);
+                                //comp.Position = new Point(Form1.Instance.groupSizeX.Min(), Form1.Instance.groupSizeY.Min());
+                                //comp.Size = new Size((Form1.Instance.groupSizeX.Max() + Form1.Instance.maxWidth) - Form1.Instance.groupSizeX.Min(),
+                                //                     (Form1.Instance.groupSizeY.Max() + Form1.Instance.maxHeight) - Form1.Instance.groupSizeY.Min());
                             }
                             else
                             {

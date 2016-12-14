@@ -210,6 +210,8 @@ namespace DesignPatternsStep1
                                      (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
 
                 Move(c.groupOrnaments, null, c);
+                if (s != null)
+                    Move(s.OrnamentList, s, null);
             }
             else if (s != null)
             {
