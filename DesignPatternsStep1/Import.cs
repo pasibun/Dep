@@ -33,6 +33,14 @@ namespace DesignPatternsStep1
             lines = File.ReadAllLines(importFile).ToList();
             compList.Clear();
             List<Composite> tempComp = recursiveImport(0);
+            foreach (Composite c in Form1.Instance.composites)
+            {
+                for (int i = 0; i < c.subordinates.Count; i++)
+                {
+                    if (c.subordinates[i].GetShape() is RectangleShape || c.subordinates[i].GetShape() is EllipseShape)
+                        Form1.Instance.MoveOrnamentsInGroup(c.subordinates[i].GetShape());
+                }               
+            }
             return tempComp;
         }
 
@@ -85,6 +93,7 @@ namespace DesignPatternsStep1
                             wordParts.Clear();
                             stopCount++;
                             compList.Add(comp);
+                            Form1.Instance.composites.Add(comp);
                             return recursiveImport(stopCount);
                         }
 
@@ -111,6 +120,7 @@ namespace DesignPatternsStep1
                             else
                             {
                                 s = createRectangle(location, size);
+                                Form1.Instance.moveOrnement(s, null);
                             }
                             wordParts.Clear();
                             checkIfShapeGetsOrnament(s);
@@ -142,6 +152,7 @@ namespace DesignPatternsStep1
                             else
                             {
                                 s = createEllipse(location, size);
+                                Form1.Instance.moveOrnement(s, null);
                             }
                             wordParts.Clear();
                             checkIfShapeGetsOrnament(s);

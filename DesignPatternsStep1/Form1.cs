@@ -146,9 +146,80 @@ namespace DesignPatternsStep1
             }
         }
 
-        private void moveOrnementGroup(Shape s)
+        private void Move(List<Label> ornaments, Shape s, Composite c)
         {
+            foreach (Label a in ornaments)
+            {
+                Font stringfont = new Font("Microsoft Sans Serif", 8);
+                Graphics g = CreateGraphics();
 
+                switch (a.Name.ToString())
+                {
+                    case "Above":
+                        {
+                            if (s != null)
+                                a.Location = new Point(s.X + (s.Width / 2), s.Y - 15);
+                            else if (c != null)
+                                a.Location = new Point(c.X + (c.Width / 2), c.Y - 15);
+                            Refresh();
+                            break;
+                        }
+                    case "Below":
+                        {
+                            if (s != null)
+                                a.Location = new Point(s.X + (s.Width / 2), s.Y + s.Height + 15);
+                            else if (c != null)
+                                a.Location = new Point(c.X + (c.Width / 2), c.Y + c.Height + 15);
+                            Refresh();
+                            break;
+                        }
+                    case "Left":
+                        {
+                            SizeF stringsSize = g.MeasureString(a.Text, stringfont);
+                            if (s != null)
+                                a.Location = new Point(s.X - ((int)stringsSize.Width + 25), s.Y + (s.Height / 2));
+                            else if (c != null)
+                                a.Location = new Point(c.X - ((int)stringsSize.Width + 25), c.Y + (c.Height / 2));
+                            Refresh();
+                            break;
+                        }
+                    case "Right":
+                        {
+                            if (s != null)
+                                a.Location = new Point(s.X + s.Width + 10, s.Y + (s.Height / 2));
+                            else if (c != null)
+                                a.Location = new Point(c.X + c.Width + 10, c.Y + (c.Height / 2));
+                            Refresh();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public void moveOrnement(Shape s, Composite c)
+        {
+            if (c != null)
+            {
+                groupSizeX.Clear();
+                groupSizeY.Clear();
+                maxWidth = 0;
+                maxHeight = 0;
+                determineGroupSize(c, 0, 0);
+                c.Position = new Point(groupSizeX.Min(), groupSizeY.Min());
+                c.Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
+                                     (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
+
+                Move(c.groupOrnaments, null, c);
+            }
+            else if (s != null)
+            {
+                Move(s.OrnamentList, s, null);
+            }
+        }
+
+        public void MoveOrnamentsInGroup(Shape s)
+        {
+            compList.Clear();
             foreach (Composite c in composites)
             {
                 for (int j = 0; j < c.subordinates.Count; j++)
@@ -157,6 +228,36 @@ namespace DesignPatternsStep1
                     {
                         recursiveOrnament(c, 0, 0);
                     }
+                }
+            }
+        }
+
+        public bool recursiveOrnament(Composite c, int stop, int groupInGroup)
+        {
+            if (stop.Equals(c.subordinates.Count))
+            {
+                if (groupInGroup.Equals(0))
+                {
+                    return true;
+                }
+                else
+                {
+                    return recursiveOrnament(compList2[groupInGroup - 1], 0, groupInGroup - 1);
+                }
+            }
+            else
+            {
+                if (c.subordinates[stop].GetShape() is RectangleShape || c.subordinates[stop].GetShape() is EllipseShape)
+                {
+                    moveOrnement(c.subordinates[stop].GetShape(), c);
+                    return recursiveOrnament(c, stop + 1, groupInGroup);
+                }
+                else
+                {
+                    if (groupInGroup == 0 && !moreGroups)
+                        compList2.Clear();
+                    compList2.Add(c.subordinates[stop] as Composite);
+                    return recursiveOrnament(c, stop + 1, groupInGroup + 1);
                 }
             }
         }
@@ -477,123 +578,6 @@ namespace DesignPatternsStep1
                 _Redocommands.Clear();
             }
 
-        }
-
-        private void Move(List<Label> ornaments, Shape s, Composite c)
-        {
-            foreach (Label a in ornaments)
-            {
-                Font stringfont = new Font("Microsoft Sans Serif", 8);
-                Graphics g = CreateGraphics();
-
-                switch (a.Name.ToString())
-                {
-                    case "Above":
-                        {
-                            if (s != null)
-                                a.Location = new Point(s.X + (s.Width / 2), s.Y - 15);
-                            else if (c != null)
-                                a.Location = new Point(c.X + (c.Width / 2), c.Y - 15);
-                            Refresh();
-                            break;
-                        }
-                    case "Below":
-                        {
-                            if (s != null)
-                                a.Location = new Point(s.X + (s.Width / 2), s.Y + s.Height + 15);
-                            else if (c != null)
-                                a.Location = new Point(c.X + (c.Width / 2), c.Y + c.Height + 15);
-                            Refresh();
-                            break;
-                        }
-                    case "Left":
-                        {
-                            SizeF stringsSize = g.MeasureString(a.Text, stringfont);
-                            if (s != null)
-                                a.Location = new Point(s.X - ((int)stringsSize.Width + 25), s.Y + (s.Height / 2));
-                            else if (c != null)
-                                a.Location = new Point(c.X - ((int)stringsSize.Width + 25), c.Y + (c.Height / 2));
-                            Refresh();
-                            break;
-                        }
-                    case "Right":
-                        {
-                            if (s != null)
-                                a.Location = new Point(s.X + s.Width + 10, s.Y + (s.Height / 2));
-                            else if (c != null)
-                                a.Location = new Point(c.X + c.Width + 10, c.Y + (c.Height / 2));
-                            Refresh();
-                            break;
-                        }
-                }
-            }
-        }
-
-        private void moveOrnement(Shape s, Composite c)
-        {
-            if (c != null)
-            {
-                groupSizeX.Clear();
-                groupSizeY.Clear();
-                maxWidth = 0;
-                maxHeight = 0;
-                determineGroupSize(c, 0, 0);
-                c.Position = new Point(groupSizeX.Min(), groupSizeY.Min());
-                c.Size = new Size((groupSizeX.Max() + maxWidth) - groupSizeX.Min(),
-                                     (groupSizeY.Max() + maxHeight) - groupSizeY.Min());
-                
-                Move(c.groupOrnaments, null, c);
-            }
-            else if (s != null)
-            {
-                Move(s.OrnamentList, s, null);
-            }
-        }
-
-        public void MoveOrnamentsInGroup(Shape s)
-        {
-            compList.Clear();
-            foreach (Composite c in composites)
-            {
-                for (int j = 0; j < c.subordinates.Count; j++)
-                {
-                    if (c.subordinates[j].GetShapeId().Equals(s.ShapeId))
-                    {
-                        recursiveOrnament(c, 0, 0);
-                    }
-                }
-            }
-
-        }
-
-        public bool recursiveOrnament(Composite c, int stop, int groupInGroup)
-        {
-            if (stop.Equals(c.subordinates.Count))
-            {
-                if (groupInGroup.Equals(0))
-                {
-                    return true;
-                }
-                else
-                {
-                    return recursiveOrnament(compList2[groupInGroup - 1], 0, groupInGroup - 1);
-                }
-            }
-            else
-            {
-                if (c.subordinates[stop].GetShape() is RectangleShape || c.subordinates[stop].GetShape() is EllipseShape)
-                {
-                    moveOrnement(c.subordinates[stop].GetShape(), c);
-                    return recursiveOrnament(c, stop + 1, groupInGroup);
-                }
-                else
-                {
-                    if (groupInGroup == 0 && !moreGroups)
-                        compList2.Clear();
-                    compList2.Add(c.subordinates[stop] as Composite);
-                    return recursiveOrnament(c, stop + 1, groupInGroup + 1);
-                }
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
